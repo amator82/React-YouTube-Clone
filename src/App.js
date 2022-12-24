@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Container } from 'react-bootstrap'
 
@@ -9,11 +9,16 @@ import HomeScreen from './screens/homeScreen/HomeScreen'
 import './_app.scss'
 
 const App = () => {
+    const [openSidebar, setOpenSidebar] = useState(false)
+
+    const handleOpenSidebar = () => {
+        setOpenSidebar((value) => !value)
+    }
     return (
         <>
-            <Header />
+            <Header handleOpenSidebar={handleOpenSidebar} />
             <div className='app__container border border-info'>
-                <Sidebar />
+                <Sidebar openSidebar={openSidebar} />
                 <Container fluid className='app__main border border-warning'>
                     <HomeScreen />
                 </Container>

@@ -5,10 +5,14 @@ import { FaBars, FaYoutube } from 'react-icons/fa'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdNotifications, MdApps } from 'react-icons/md'
 
-const Header = () => {
+const Header = ({ handleOpenSidebar }) => {
     return (
         <div className='header border border-dark'>
-            <FaBars className='header__menu' size={26} />
+            <FaBars
+                className='header__menu'
+                size={26}
+                onClick={() => handleOpenSidebar()}
+            />
             <FaYoutube size={30} className='header__logo' />
             <form>
                 <input type='text' placeholder='Search' />
