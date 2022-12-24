@@ -8,13 +8,13 @@
     align-items: center;
     padding: 1.75rem 3rem;
     background-color: $black-primary;
-    @media (max-width: $brealpoint-small) {
+    @media (max-width: $breakpoint-small) {
         gap: 0.7rem;
         padding: 2rem 1rem;
     }
     &__menu {
         display: none;
-        @media (max-width: $brealpoint-small) {
+        @media (max-width: $breakpoint-small) {
             display: block;
         }
     }
@@ -29,7 +29,7 @@
         border-radius: 3px;
         border: 1.2px solid;
         background-color: $black-primary;
-        @media (max-width: $brealpoint-small) {
+        @media (max-width: $breakpoint-small) {
             flex: 1;
         }
         input {
@@ -58,7 +58,7 @@
         flex: 0.15;
         justify-content: space-around;
         align-items: center;
-        @media (max-width: $brealpoint-small) {
+        @media (max-width: $breakpoint-small) {
             > *:not(img) {
                 display: none;
             }
