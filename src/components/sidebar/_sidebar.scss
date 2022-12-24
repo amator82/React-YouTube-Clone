@@ -1,0 +1,52 @@
+@import '../../_base.scss';
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: $black-primary;
+    width: 250px;
+    height: 90vh;
+    padding-top: 2rem;
+    &.open {
+        display: block;
+    }
+    @media (max-width: $breakpoint-medium) {
+        width: 90px;
+    }
+    @media (max-width: $breakpoint-small) {
+        display: none;
+    }
+    &__list {
+        padding-left: 0;
+    }
+    &__link {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.5rem;
+        transition: background-color 0.3s ease 0s;
+        span {
+            margin-left: 1rem;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+        }
+        &_border {
+            padding-top: 1.4rem;
+            padding-bottom: 1.4rem;
+            border-top: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: $border-color;
+            }
+        }
+        @media (max-width: $breakpoint-medium) {
+            justify-content: center;
+            span {
+                display: none;
+            }
+        }
+    }
+}
