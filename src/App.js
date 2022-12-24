@@ -6,6 +6,8 @@ import Header from './components/header/Header'
 import Sidebar from './components/sidebar/Sidebar'
 import HomeScreen from './screens/homeScreen/HomeScreen'
 
+import './_app.scss'
+
 const App = () => {
     return (
         <>
