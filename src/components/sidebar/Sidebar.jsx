@@ -11,9 +11,12 @@ import {
     MdSentimentDissatisfied
 } from 'react-icons/md'
 
-const Sidebar = () => {
+const Sidebar = ({ openSidebar, handleOpenSidebar }) => {
     return (
-        <aside className='sidebar'>
+        <aside
+            className={openSidebar ? 'sidebar open' : 'sidebar'}
+            onClick={() => handleOpenSidebar(false)}
+        >
             <ul className='sidebar__list'>
                 <li className='sidebar__link'>
                     <MdHome size={23} />

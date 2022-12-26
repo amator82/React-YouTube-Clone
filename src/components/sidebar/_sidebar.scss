@@ -7,14 +7,17 @@
     width: 250px;
     height: 90vh;
     padding-top: 2rem;
+    transition: transform 0.2s ease-in;
     &.open {
-        display: block;
+        transform: translateX(0);
     }
     @media (max-width: $breakpoint-medium) {
         width: 90px;
     }
     @media (max-width: $breakpoint-small) {
-        display: none;
+        position: fixed;
+        z-index: 999;
+        transform: translateX(-100%);
     }
     &__list {
         padding-left: 0;
