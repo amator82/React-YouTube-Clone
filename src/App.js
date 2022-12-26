@@ -1,23 +1,25 @@
 import React, { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
+import NotFound from './pages/notFound/NotFound';
 
-import { Routes, Route, Switch } from 'react-router-dom'
+import MainLayout from './layouts/MainLayout'
+import HomeLayout from './layouts/HomeLayout'
 
 import './scss/_app.scss'
-import MainLayout from './layouts/MainLayout'
 
 const App = () => {
-
     return (
         <Routes>
             <Route path='/' element={<MainLayout />}>
-                <Route
-                    path=''
-                    element={<Home />}
-                />
+                <Route path='' element={<HomeLayout />}>
+                    <Route path='' element={<Home />} />
+                    <Route path='search' element={<h1>Search Value</h1>} />
+                </Route>
                 <Route path='auth' element={<Login />} />
+                <Route path='*' element={<NotFound />} />
             </Route>
         </Routes>
     )
