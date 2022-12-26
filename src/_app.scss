@@ -1,6 +1,13 @@
+.wrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
 .app {
     &__container {
         display: flex;
-        height: 90vh;
+    }
+    &__main {
     }
 }

@@ -15,7 +15,7 @@ const App = () => {
         setOpenSidebar((value) => !value)
     }
     return (
-        <>
+        <div className='wrapper'>
             <Header handleOpenSidebar={handleOpenSidebar} />
             <div className='app__container'>
                 <Sidebar
@@ -26,7 +26,7 @@ const App = () => {
                     <HomeScreen />
                 </Container>
             </div>
-        </>
+        </div>
     )
 }
 

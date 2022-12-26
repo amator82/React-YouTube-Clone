@@ -22,11 +22,14 @@
         color: red;
     }
     form {
+        height: 40px;
         display: flex;
         flex: 0.6;
+        overflow: hidden;
         margin: 0.1rem;
         border-radius: 3px;
         border: 1.2px solid $border-color;
+        border-radius: 25px;
         background-color: $black-primary;
         @media (max-width: $breakpoint-small) {
             flex: 1;
@@ -40,6 +43,10 @@
             background-color: transparent;
             &:focus {
                 outline: none;
+            }
+            &::placeholder {
+                padding: 0 0.5rem;
+                font-size: 18px;
             }
         }
         button {
