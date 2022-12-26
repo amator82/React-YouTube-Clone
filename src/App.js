@@ -17,9 +17,12 @@ const App = () => {
     return (
         <>
             <Header handleOpenSidebar={handleOpenSidebar} />
-            <div className='app__container border border-info'>
-                <Sidebar openSidebar={openSidebar} />
-                <Container fluid className='app__main border border-warning'>
+            <div className='app__container'>
+                <Sidebar
+                    handleOpenSidebar={handleOpenSidebar}
+                    openSidebar={openSidebar}
+                />
+                <Container fluid className='app__main'>
                     <HomeScreen />
                 </Container>
             </div>

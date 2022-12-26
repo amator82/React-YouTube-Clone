@@ -24,10 +24,9 @@
     form {
         display: flex;
         flex: 0.6;
-        padding: 0.1rem;
         margin: 0.1rem;
         border-radius: 3px;
-        border: 1.2px solid;
+        border: 1.2px solid $border-color;
         background-color: $black-primary;
         @media (max-width: $breakpoint-small) {
             flex: 1;
