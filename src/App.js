@@ -1,32 +1,25 @@
 import React, { useState } from 'react'
 
-import { Container } from 'react-bootstrap'
+import Home from './pages/home/Home'
+import Login from './pages/login/Login'
 
-import Header from './components/header/Header'
-import Sidebar from './components/sidebar/Sidebar'
-import HomeScreen from './screens/homeScreen/HomeScreen'
+import { Routes, Route, Switch } from 'react-router-dom'
 
-import './_app.scss'
+import './scss/_app.scss'
+import MainLayout from './layouts/MainLayout'
 
 const App = () => {
-    const [openSidebar, setOpenSidebar] = useState(false)
 
-    const handleOpenSidebar = () => {
-        setOpenSidebar((value) => !value)
-    }
     return (
-        <div className='wrapper'>
-            <Header handleOpenSidebar={handleOpenSidebar} />
-            <div className='app__container'>
-                <Sidebar
-                    handleOpenSidebar={handleOpenSidebar}
-                    openSidebar={openSidebar}
+        <Routes>
+            <Route path='/' element={<MainLayout />}>
+                <Route
+                    path=''
+                    element={<Home />}
                 />
-                <Container fluid className='app__main'>
-                    <HomeScreen />
-                </Container>
-            </div>
-        </div>
+                <Route path='auth' element={<Login />} />
+            </Route>
+        </Routes>
     )
 }
 

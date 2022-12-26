@@ -1,13 +1,13 @@
 import React from 'react'
 import './_header.scss'
 
-import { FaBars, FaYoutube } from 'react-icons/fa'
+import { FaBars } from 'react-icons/fa'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdNotifications, MdApps } from 'react-icons/md'
 
 const Header = ({ handleOpenSidebar }) => {
     return (
-        <div className='header border border-dark'>
+        <div className='header'>
             <FaBars
                 className='header__menu'
                 size={26}
@@ -18,7 +18,6 @@ const Header = ({ handleOpenSidebar }) => {
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/800px-YouTube_full-color_icon_%282017%29.svg.png'
                 alt=''
             />
-            {/* <FaYoutube size={30}  /> */}
             <form>
                 <input type='text' placeholder='Search' />
                 <button type='submit'>

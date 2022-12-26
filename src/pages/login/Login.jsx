@@ -1,7 +1,7 @@
 import React from 'react'
-import './loginScreen.scss'
+import './_login.scss'
 
-const LoginScreen = () => {
+const Login = () => {
     return (
         <div className='login'>
             <div className='login__container'>
@@ -18,4 +18,4 @@ const LoginScreen = () => {
     )
 }
 
-export default LoginScreen
+export default Login
