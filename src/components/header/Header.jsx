@@ -13,7 +13,12 @@ const Header = ({ handleOpenSidebar }) => {
                 size={26}
                 onClick={() => handleOpenSidebar()}
             />
-            <FaYoutube size={30} className='header__logo' />
+            <img
+                className='header__logo'
+                src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/800px-YouTube_full-color_icon_%282017%29.svg.png'
+                alt=''
+            />
+            {/* <FaYoutube size={30}  /> */}
             <form>
                 <input type='text' placeholder='Search' />
                 <button type='submit'>
