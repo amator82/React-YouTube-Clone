@@ -1,7 +1,17 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+
+import { login } from './../../redux/actions/auth.action'
+
 import './_login.scss'
 
 const Login = () => {
+    const dispatch = useDispatch()
+
+    const handleLogin = () => {
+        console.log('handleLogin');
+        dispatch(login())
+    }
     return (
         <div className='login'>
             <div className='login__container'>
@@ -11,7 +21,9 @@ const Login = () => {
                         alt='logo'
                     />
                 </div>
-                <button className='login__button'>Login with Google</button>
+                <button onClick={handleLogin} className='login__button'>
+                    Login with Google
+                </button>
                 <p className='login__text'>Made by using YouYube Data API</p>
             </div>
         </div>
