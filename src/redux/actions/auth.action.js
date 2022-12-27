@@ -16,6 +16,8 @@ export const login = () => async (dispatch) => {
         })
 
         const provider = new firebase.auth.GoogleAuthProvider()
+        provider.addScope('https://www.googleapis.com/auth/youtube.force-ssl')
+
         const res = await auth.signInWithPopup(provider)
         const accessToken = res.credential.accessToken
 
@@ -45,11 +47,10 @@ export const login = () => async (dispatch) => {
     }
 }
 
-export const log_out = () => async (dispatch) =>{
+export const log_out = () => async (dispatch) => {
     await auth.signOut()
     dispatch({
-        type: LOG_OUT,
-
+        type: LOG_OUT
     })
 
     sessionStorage.removeItem('ytc-access-token')
