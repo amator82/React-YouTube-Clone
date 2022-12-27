@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
-import NotFound from './pages/notFound/NotFound';
+import NotFound from './pages/notFound/NotFound'
 
 import MainLayout from './layouts/MainLayout'
 import HomeLayout from './layouts/HomeLayout'
@@ -11,6 +13,16 @@ import HomeLayout from './layouts/HomeLayout'
 import './scss/_app.scss'
 
 const App = () => {
+    const { accessToken, loading } = useSelector((state) => state.auth)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!loading && !accessToken) {
+            navigate('/auth')
+        }
+    }, [accessToken, loading, navigate])
+
     return (
         <Routes>
             <Route path='/' element={<MainLayout />}>
