@@ -18,7 +18,7 @@ export const getPopularVideos = () => async (dispatch) => {
                 chart: 'mostPopular',
                 regionCode: 'us',
                 maxResults: 20,
-                pageToken: ''
+                pageToken: 'CBQQAA'
             }
         })
 
@@ -31,7 +31,7 @@ export const getPopularVideos = () => async (dispatch) => {
         })
     } catch (error) {
         console.log(error.message)
-        
+
         dispatch({
             type: HOME_VIDEOS_FAIL,
             payload: error.message
