@@ -12,12 +12,19 @@ import {
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import { Col, Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
+import VideoSkeleton from './../../components/video/VideoSkeleton'
+
+const videoSkeletons = [...new Array(15)].map((_, index) => (
+    <VideoSkeleton key={index} />
+))
 
 const Home = () => {
     const dispatch = useDispatch()
 
-    const { videos, activeCategory } = useSelector((state) => state.homeVideos)
+    const { videos, activeCategory, loading } = useSelector(
+        (state) => state.homeVideos
+    )
 
     const fetchData = () => {
         if (activeCategory === 'All') dispatch(getPopularVideos())
@@ -42,13 +49,19 @@ const Home = () => {
                     <div className='spinner-border text-danger d-block mx-auto'></div>
                 }
             >
-                {videos.map((video) => {
-                    return (
-                        <Col lg={3} md={4} key={video.id}>
-                            <Video video={video} />
-                        </Col>
-                    )
-                })}
+                {loading ? (
+                    videos.map((video) => {
+                        return (
+                            <Col lg={3} md={4} key={video.id}>
+                                <Video video={video} />
+                            </Col>
+                        )
+                    })
+                ) : (
+                    <div className='skeletons'>
+                        {videoSkeletons}
+                    </div>
+                )}
             </InfiniteScroll>
         </>
     )
