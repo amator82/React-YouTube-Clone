@@ -1,11 +1,14 @@
 @import '../../scss/_base.scss';
 
 .sidebar {
+    position: sticky;
+    top: 10vh;
+    left: 0;
     display: flex;
     flex-direction: column;
     background-color: $black-primary;
     width: 250px;
-    height: 90vh;
+    // height: 90vh;
     padding-top: 2rem;
     transition: transform 0.2s ease-in;
     &.open {

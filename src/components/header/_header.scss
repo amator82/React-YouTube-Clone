@@ -1,6 +1,9 @@
 @import '../../scss/_base.scss';
 
 .header {
+    z-index: 999;
+    position: fixed;
+    top: 0;
     height: 10vh;
     width: 100%;
     display: flex;
