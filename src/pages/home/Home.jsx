@@ -22,11 +22,13 @@ const Home = () => {
         <>
             <CategoriesBar />
             <Row>
-                {videos.map((video, index) => (
-                    <Col lg={3} md={4} key={video.id}>
-                        <Video video={video} />
-                    </Col>
-                ))}
+                {videos.map((video, index) => {
+                    return (
+                        <Col lg={3} md={4} key={video.id}>
+                            <Video video={video} />
+                        </Col>
+                    )
+                })}
             </Row>
         </>
     )
