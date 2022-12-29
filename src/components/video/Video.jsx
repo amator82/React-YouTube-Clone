@@ -17,7 +17,7 @@ const Video = ({ video }) => {
             channelTitle,
             title,
             publishedAt,
-            thumbnails: { standard }
+            thumbnails: { medium }
         }
     } = video
 
@@ -28,6 +28,8 @@ const Video = ({ video }) => {
     const seconds = moment.duration(duration).asSeconds()
     const _duration = moment.utc(seconds * 1000).format('mm:ss')
 
+    const _videoId = id?.videoId || id
+
     useEffect(() => {
         const getVideoDetails = async () => {
             const {
@@ -35,17 +37,17 @@ const Video = ({ video }) => {
             } = await request('/videos', {
                 params: {
                     part: 'contentDetails,statistics',
-                    id
+                    id: _videoId
                 }
             })
             setDuration(items[0].contentDetails.duration)
             setViews(items[0].statistics.viewCount)
         }
         getVideoDetails()
-    }, [id])
+    }, [_videoId])
 
     useEffect(() => {
-        const getChannelIcon = async () => {
+        const get_channel_icon = async () => {
             const {
                 data: { items }
             } = await request('/channels', {
@@ -56,26 +58,24 @@ const Video = ({ video }) => {
             })
             setChannelIcon(items[0].snippet.thumbnails.default)
         }
-        getChannelIcon()
+        get_channel_icon()
     }, [channelId])
 
     return (
         <div className='video'>
             <div className='video__top'>
-                <img src={standard.url} alt='' />
+                <img src={medium.url} alt='' />
                 <span className='video__duration'>{_duration}</span>
             </div>
             <div className='video__title'>{title}</div>
             <div className='video__details'>
-                <span className='video__views'>
-                    <AiFillEye /> {numeral(views).format('0.a')} Views
+                <span>
+                    <AiFillEye /> {numeral(views).format('0.a')} Views •
                 </span>
-                <div className='video__date'>
-                    {moment(publishedAt).fromNow()}
-                </div>
+                <span>{moment(publishedAt).fromNow()} </span>
             </div>
             <div className='video__channel'>
-                <img src={channelIcon?.url} alt={channelTitle} />
+                <img src={channelIcon?.url} alt='' />
                 <p>{channelTitle}</p>
             </div>
         </div>
