@@ -80,7 +80,6 @@ const Video = ({ video }) => {
             </div>
             <div className='video__channel'>
                 <LazyLoadImage src={channelIcon?.url} effect='blur' />
-                {/* <img src={channelIcon?.url} alt='' /> */}
                 <p>{channelTitle}</p>
             </div>
         </div>
