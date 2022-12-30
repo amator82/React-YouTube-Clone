@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import NotFound from './pages/notFound/NotFound'
+import WatchScreen from './pages/watchScreen/WatchScreen'
 
 import MainLayout from './layouts/MainLayout'
 import HomeLayout from './layouts/HomeLayout'
@@ -29,6 +30,7 @@ const App = () => {
                 <Route path='' element={<HomeLayout />}>
                     <Route path='' element={<Home />} />
                     <Route path='search' element={<h1>Search Value</h1>} />
+                    <Route path='watch' element={<WatchScreen />} />
                 </Route>
                 <Route path='auth' element={<Login />} />
                 <Route path='*' element={<NotFound />} />
