@@ -9,6 +9,7 @@ import App from './App'
 import store from './redux/store'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 import './scss/_base.scss'
 import './scss/null.scss'

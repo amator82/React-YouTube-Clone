@@ -13,6 +13,7 @@ import {
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 import { Col } from 'react-bootstrap'
+
 import VideoSkeleton from './../../components/video/VideoSkeleton'
 
 const videoSkeletons = [...new Array(15)].map((_, index) => (

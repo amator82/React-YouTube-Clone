@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+
 import request from './../../api'
 
 import moment from 'moment'
@@ -64,7 +66,7 @@ const Video = ({ video }) => {
     return (
         <div className='video'>
             <div className='video__top'>
-                <img src={medium.url} alt='' />
+                <LazyLoadImage src={medium.url} effect='blur' />
                 <span className='video__duration'>{_duration}</span>
             </div>
             <div className='video__title'>{title}</div>
@@ -77,7 +79,8 @@ const Video = ({ video }) => {
                 </span>
             </div>
             <div className='video__channel'>
-                <img src={channelIcon?.url} alt='' />
+                <LazyLoadImage src={channelIcon?.url} effect='blur' />
+                {/* <img src={channelIcon?.url} alt='' /> */}
                 <p>{channelTitle}</p>
             </div>
         </div>
