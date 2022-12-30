@@ -4,17 +4,17 @@ import ContentLoader from 'react-content-loader'
 const VideoSkeleton = () => (
     <ContentLoader
         speed={2}
-        width='310'
-        height='190'
-        viewBox='0 0 290 190'
+        width='320'
+        height='272'
+        viewBox='0 0 310 272'
         backgroundColor='#f3f3f3'
         foregroundColor='#ecebeb'
     >
-        <rect x='0' y='0' rx='3' ry='3' width='290' height='100' />
-        <rect x='0' y='110' rx='3' ry='3' width='290' height='6' />
-        <rect x='0' y='125' rx='3' ry='3' width='210' height='6' />
-        <circle cx='21' cy='160' r='20' />
-        <rect x='50' y='155' rx='3' ry='3' width='100' height='6' />
+        <rect x='0' y='0' rx='20' ry='20' width='309' height='172' />
+        <rect x='0' y='180' rx='3' ry='3' width='306' height='6' />
+        <rect x='0' y='193' rx='3' ry='3' width='164' height='6' />
+        <circle cx='24' cy='230' r='24' />
+        <rect x='55' y='225' rx='3' ry='3' width='92' height='6' />
     </ContentLoader>
 )
 export default VideoSkeleton

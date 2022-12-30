@@ -49,7 +49,7 @@ const Home = () => {
                     <div className='spinner-border text-danger d-block mx-auto'></div>
                 }
             >
-                {loading ? (
+                {!loading ? (
                     videos.map((video) => {
                         return (
                             <Col lg={3} md={4} key={video.id}>
@@ -58,9 +58,7 @@ const Home = () => {
                         )
                     })
                 ) : (
-                    <div className='skeletons'>
-                        {videoSkeletons}
-                    </div>
+                    <div className='skeletons'>{videoSkeletons}</div>
                 )}
             </InfiniteScroll>
         </>
