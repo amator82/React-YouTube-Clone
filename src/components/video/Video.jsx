@@ -75,7 +75,7 @@ const Video = ({ video }) => {
                     <AiFillEye /> {numeral(views).format('0.a')} Views
                 </span>
                 <span className='video__date'>
-                    {moment(publishedAt).fromNow()}{' '}
+                    {moment(publishedAt).fromNow()}
                 </span>
             </div>
             <div className='video__channel'>
