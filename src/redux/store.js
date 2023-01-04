@@ -9,12 +9,14 @@ import {
     selectedVideoReducer
 } from './reducers/video.reducer'
 import { channelDetailsReducer } from './reducers/channel.reducer'
+import { commentsListReducer } from './reducers/comments.reducer'
 
 const rootReducer = combineReducers({
     auth: authReducer,
     homeVideos: homeVideosReducer,
     selectedVideo: selectedVideoReducer,
-    channelDetails: channelDetailsReducer
+    channelDetails: channelDetailsReducer,
+    commentsList: commentsListReducer
 })
 
 export const store = createStore(

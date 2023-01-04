@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import SingleComment from './../singleComment/SingleComment'
 
 import './_comments.scss'
+import { getCommentsOfVideoId } from './../../redux/actions/comments.action'
 
-const Comments = () => {
+const Comments = ({ videoId }) => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getCommentsOfVideoId(videoId))
+    }, [dispatch, videoId])
+
+    const comments = useSelector((state) => state.commentsList.comments)
+
+    const _comments = comments?.map(
+        (comment) => comment.snippet.topLevelComment.snippet
+    )
+
     const handleComment = () => {}
+
     return (
         <div className='comments'>
             <p>13234 comments</p>
@@ -21,12 +36,14 @@ const Comments = () => {
                         type='text'
                         placeholder='Write a comment'
                     />
-                    <button className='comments__button border-0 p-2'>Comment</button>
+                    <button className='comments__button border-0 p-2'>
+                        Comment
+                    </button>
                 </form>
             </div>
             <div className='comments__list'>
-                {[...Array(15)].map((_, index) => (
-                    <SingleComment key={index} />
+                {_comments?.map((comment, index) => (
+                    <SingleComment comment={comment} key={index} />
                 ))}
             </div>
         </div>
