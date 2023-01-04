@@ -30,7 +30,7 @@ const App = () => {
                 <Route path='' element={<HomeLayout />}>
                     <Route path='' element={<Home />} />
                     <Route path='search' element={<h1>Search Value</h1>} />
-                    <Route path='watch' element={<WatchScreen />} />
+                    <Route path='watch/:id' element={<WatchScreen />} />
                 </Route>
                 <Route path='auth' element={<Login />} />
                 <Route path='*' element={<NotFound />} />
