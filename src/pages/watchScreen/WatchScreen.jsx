@@ -22,8 +22,6 @@ const WatchScreen = () => {
 
     const { video, loading } = useSelector((state) => state.selectedVideo)
 
-    console.log(video)
-
     return (
         <Row>
             <Col lg={8}>
@@ -45,8 +43,8 @@ const WatchScreen = () => {
                 <Comments />
             </Col>
             <Col lg={4}>
-                {[...Array(10)].map(() => (
-                    <VideoHorizonatal />
+                {[...Array(10)].map((_, index) => (
+                    <VideoHorizonatal key={index} />
                 ))}
             </Col>
         </Row>

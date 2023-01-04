@@ -8,11 +8,13 @@ import {
     homeVideosReducer,
     selectedVideoReducer
 } from './reducers/video.reducer'
+import { channelDetailsReducer } from './reducers/channel.reducer'
 
 const rootReducer = combineReducers({
     auth: authReducer,
     homeVideos: homeVideosReducer,
-    selectedVideo: selectedVideoReducer
+    selectedVideo: selectedVideoReducer,
+    channelDetails: channelDetailsReducer
 })
 
 export const store = createStore(
