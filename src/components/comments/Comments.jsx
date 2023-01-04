@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import SingleComment from './../singleComment/SingleComment'
 
 import './_comments.scss'
-import { getCommentsOfVideoId } from './../../redux/actions/comments.action'
+import {
+    getCommentsOfVideoId,
+    addComment
+} from './../../redux/actions/comments.action'
 
-const Comments = ({ videoId }) => {
+const Comments = ({ videoId, totalComments }) => {
+    const [text, setText] = useState('')
+
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -19,11 +24,17 @@ const Comments = ({ videoId }) => {
         (comment) => comment.snippet.topLevelComment.snippet
     )
 
-    const handleComment = () => {}
+    const handleComment = (e) => {
+        e.preventDefault()
+        if (text.length === 0) return
+
+        dispatch(addComment(videoId, text))
+        setText('')
+    }
 
     return (
         <div className='comments'>
-            <p>13234 comments</p>
+            <p>{totalComments} comments</p>
             <div className='comments__body d-flex w-100 my-2'>
                 <img
                     className='channel-videoMetaData__icon rounded-circle mr-3'
@@ -35,6 +46,8 @@ const Comments = ({ videoId }) => {
                         className='comments__input flex-grow-1'
                         type='text'
                         placeholder='Write a comment'
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
                     />
                     <button className='comments__button border-0 p-2'>
                         Comment
