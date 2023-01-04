@@ -47,6 +47,9 @@
         letter-spacing: 0.5px;
         background-color: red;
         transition: background-color 0.3s ease 0s;
+        &.btn-grey{
+            background-color: grey;
+        }
         @media (any-hover: hover) {
             &:hover {
                 background-color: rgb(212, 29, 29);
