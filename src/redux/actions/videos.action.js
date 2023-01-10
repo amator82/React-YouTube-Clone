@@ -4,7 +4,10 @@ import {
     HOME_VIDEOS_SUCCESS,
     SELECTED_VIDEO_REQUEST,
     SELECTED_VIDEO_SUCCESS,
-    SELECTED_VIDEO_FAIL
+    SELECTED_VIDEO_FAIL,
+    RELATED_VIDEOS_REQUEST,
+    RELATED_VIDEOS_SUCCESS,
+    RELATED_VIDEOS_FAIL
 } from '../actionType'
 
 import request from '../../api'
@@ -99,6 +102,35 @@ export const getVideoById = (id) => async (dispatch) => {
         dispatch({
             type: SELECTED_VIDEO_FAIL,
             payload: error.message
+        })
+    }
+}
+
+export const getRelatedVideos = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: RELATED_VIDEOS_REQUEST
+        })
+
+        const { data } = await request('/search', {
+            params: {
+                part: 'snippet',
+                relatedVideoId: id,
+                maxResults: 15,
+                type: 'video'
+            }
+        })
+
+        dispatch({
+            type: RELATED_VIDEOS_SUCCESS,
+            payload: data.items
+        })
+    } catch (error) {
+        console.log(error.response.data.message, 'Get related video error')
+
+        dispatch({
+            type: RELATED_VIDEOS_FAIL,
+            payload: error.response.data.message
         })
     }
 }

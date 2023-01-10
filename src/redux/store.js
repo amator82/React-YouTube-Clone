@@ -6,6 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { authReducer } from './reducers/auth.reducer'
 import {
     homeVideosReducer,
+    relatedVideoReducer,
     selectedVideoReducer
 } from './reducers/video.reducer'
 import { channelDetailsReducer } from './reducers/channel.reducer'
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     homeVideos: homeVideosReducer,
     selectedVideo: selectedVideoReducer,
     channelDetails: channelDetailsReducer,
-    commentsList: commentsListReducer
+    commentsList: commentsListReducer,
+    relatedVideos: relatedVideoReducer
 })
 
 export const store = createStore(

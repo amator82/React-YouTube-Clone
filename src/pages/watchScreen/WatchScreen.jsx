@@ -7,10 +7,14 @@ import VideoMetaData from '../../components/videoMetaData/VideoMetaData'
 import VideoHorizonatal from './../../components/videoHorizontal/VideoHorizonatal'
 import Comments from '../../components/comments/Comments'
 
-import { getVideoById } from './../../redux/actions/videos.action'
+import {
+    getRelatedVideos,
+    getVideoById
+} from './../../redux/actions/videos.action'
 
 import { Row, Col } from 'react-bootstrap'
 import './watchScreen.scss'
+import VideoHorizontalSceleton from './../../components/videoHorizontal/VideoHorizontalSceleton'
 
 const WatchScreen = () => {
     const dispatch = useDispatch()
@@ -18,7 +22,12 @@ const WatchScreen = () => {
 
     useEffect(() => {
         dispatch(getVideoById(id))
+        dispatch(getRelatedVideos(id))
     }, [dispatch, id])
+
+    const { videos, loading: relatedVideosLoading } = useSelector(
+        (state) => state.relatedVideos
+    )
 
     const { video, loading } = useSelector((state) => state.selectedVideo)
 
@@ -46,9 +55,18 @@ const WatchScreen = () => {
                 />
             </Col>
             <Col lg={4}>
-                {[...Array(10)].map((_, index) => (
-                    <VideoHorizonatal key={index} />
-                ))}
+                {!loading
+                    ? videos
+                        ?.filter((video) => video.snippet)
+                        ?.map((video) => (
+                            <VideoHorizonatal
+                                video={video}
+                                key={video.id.videoId}
+                            />
+                        ))
+                    : [...new Array(7)].map((_, index) => (
+                        <VideoHorizontalSceleton key={index} />
+                    ))}
             </Col>
         </Row>
     )
