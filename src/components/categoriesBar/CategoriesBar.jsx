@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { useDispatch } from 'react-redux'
 
-import { getVideosFromCategory } from '../../redux/actions/videos.action'
+import { getVideosByCategory } from '../../redux/actions/videos.action'
 
 import './_categoriesBar.scss'
 import { getPopularVideos } from './../../redux/actions/videos.action'
@@ -38,7 +38,7 @@ const CategoriesBar = () => {
         if (category === 'All') {
             dispatch(getPopularVideos())
         } else {
-            dispatch(getVideosFromCategory(category))
+            dispatch(getVideosByCategory(category))
         }
     }
 

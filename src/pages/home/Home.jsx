@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import {
     getPopularVideos,
-    getVideosFromCategory
+    getVideosByCategory
 } from './../../redux/actions/videos.action'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -30,7 +30,7 @@ const Home = () => {
     const fetchData = () => {
         if (activeCategory === 'All') dispatch(getPopularVideos())
         else {
-            dispatch(getVideosFromCategory(activeCategory))
+            dispatch(getVideosByCategory(activeCategory))
         }
     }
 
