@@ -15,7 +15,7 @@ const Header = ({ handleOpenSidebar }) => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        navigate(`search/${input}`)
+        navigate(`/search/${input}`)
     }
 
     return (
