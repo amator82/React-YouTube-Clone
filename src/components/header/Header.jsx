@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './_header.scss'
 
 import { FaBars } from 'react-icons/fa'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdNotifications, MdApps } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom'
 
 const Header = ({ handleOpenSidebar }) => {
+    const navigate = useNavigate()
+
+    const [input, setInput] = useState('')
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        navigate(`search/${input}`)
+    }
+
     return (
         <div className='header'>
             <FaBars
@@ -16,10 +27,15 @@ const Header = ({ handleOpenSidebar }) => {
             <img
                 className='header__logo'
                 src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/800px-YouTube_full-color_icon_%282017%29.svg.png'
-                alt=''
+                alt='logo'
             />
-            <form>
-                <input type='text' placeholder='Search' />
+            <form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    placeholder='Search'
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                />
                 <button type='submit'>
                     <AiOutlineSearch size={22} />
                 </button>

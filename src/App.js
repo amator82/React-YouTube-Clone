@@ -7,6 +7,7 @@ import Home from './pages/home/Home'
 import Login from './pages/login/Login'
 import NotFound from './pages/notFound/NotFound'
 import WatchScreen from './pages/watchScreen/WatchScreen'
+import SearchPage from './pages/searchPage/SearchPage'
 
 import MainLayout from './layouts/MainLayout'
 import HomeLayout from './layouts/HomeLayout'
@@ -29,7 +30,7 @@ const App = () => {
             <Route path='/' element={<MainLayout />}>
                 <Route path='' element={<HomeLayout />}>
                     <Route path='' element={<Home />} />
-                    <Route path='search' element={<h1>Search Value</h1>} />
+                    <Route path='search/:query' element={<SearchPage />} />
                     <Route path='watch/:id' element={<WatchScreen />} />
                 </Route>
                 <Route path='auth' element={<Login />} />
