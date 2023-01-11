@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import './_header.scss'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { FaBars } from 'react-icons/fa'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdNotifications, MdApps } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
+
+import './_header.scss'
 
 const Header = ({ handleOpenSidebar }) => {
     const navigate = useNavigate()
@@ -24,11 +25,13 @@ const Header = ({ handleOpenSidebar }) => {
                 size={26}
                 onClick={() => handleOpenSidebar()}
             />
-            <img
-                className='header__logo'
-                src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/800px-YouTube_full-color_icon_%282017%29.svg.png'
-                alt='logo'
-            />
+            <Link to='/'>
+                <img
+                    className='header__logo'
+                    src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/800px-YouTube_full-color_icon_%282017%29.svg.png'
+                    alt='logo'
+                />
+            </Link>
             <form onSubmit={handleSubmit}>
                 <input
                     type='text'

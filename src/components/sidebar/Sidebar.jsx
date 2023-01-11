@@ -1,7 +1,9 @@
 import React from 'react'
-import './_sidebar.scss'
+import { Link } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
+
+import { log_out } from '../../redux/actions/auth.action'
 
 import {
     MdSubscriptions,
@@ -12,7 +14,8 @@ import {
     MdHome,
     MdSentimentDissatisfied
 } from 'react-icons/md'
-import { log_out } from '../../redux/actions/auth.action'
+
+import './_sidebar.scss'
 
 const Sidebar = ({ openSidebar, handleOpenSidebar }) => {
     const dispatch = useDispatch()
@@ -20,21 +23,25 @@ const Sidebar = ({ openSidebar, handleOpenSidebar }) => {
     const logOutHandler = () => {
         dispatch(log_out())
     }
-    
+
     return (
         <aside
             className={openSidebar ? 'sidebar open' : 'sidebar'}
             onClick={() => handleOpenSidebar(false)}
         >
             <ul className='sidebar__list'>
-                <li className='sidebar__link'>
-                    <MdHome size={23} />
-                    <span>Home</span>
-                </li>
-                <li className='sidebar__link'>
-                    <MdSubscriptions size={23} />
-                    <span>Subscriptions</span>
-                </li>
+                <Link to='/'>
+                    <li className='sidebar__link'>
+                        <MdHome size={23} />
+                        <span>Home</span>
+                    </li>
+                </Link>
+                <Link to='/feed/subscriptions'>
+                    <li className='sidebar__link'>
+                        <MdSubscriptions size={23} />
+                        <span>Subscriptions</span>
+                    </li>
+                </Link>
                 <li className='sidebar__link'>
                     <MdThumbUp size={23} />
                     <span>Liked Video</span>

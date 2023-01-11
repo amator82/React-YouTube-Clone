@@ -8,6 +8,7 @@ import Login from './pages/login/Login'
 import NotFound from './pages/notFound/NotFound'
 import WatchScreen from './pages/watchScreen/WatchScreen'
 import SearchPage from './pages/searchPage/SearchPage'
+import SubscriptionsPage from './pages/subsctiptionsPage/SubscriptionsPage'
 
 import MainLayout from './layouts/MainLayout'
 import HomeLayout from './layouts/HomeLayout'
@@ -32,6 +33,7 @@ const App = () => {
                     <Route path='' element={<Home />} />
                     <Route path='search/:query' element={<SearchPage />} />
                     <Route path='watch/:id' element={<WatchScreen />} />
+                    <Route path='feed/subscriptions' element={<SubscriptionsPage />} />
                 </Route>
                 <Route path='auth' element={<Login />} />
                 <Route path='*' element={<NotFound />} />
