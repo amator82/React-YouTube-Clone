@@ -13,7 +13,10 @@ import {
     SEARCH_VIDEOS_FAIL,
     SUBSCRIPTIONS_CHANNEL_REQUEST,
     SUBSCRIPTIONS_CHANNEL_SUCCESS,
-    SUBSCRIPTIONS_CHANNEL_FAIL
+    SUBSCRIPTIONS_CHANNEL_FAIL,
+    CHANNEL_VIDEOS_REQUEST,
+    CHANNEL_VIDEOS_SUCCESS,
+    CHANNEL_VIDEOS_FAIL
 } from './../actionType'
 
 export const homeVideosReducer = (
@@ -166,6 +169,35 @@ export const subscriptionsChannelReducer = (
                 loading: false
             }
         case SUBSCRIPTIONS_CHANNEL_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: payload
+            }
+        default:
+            return state
+    }
+}
+
+export const channelVideosReducer = (
+    state = { loading: true, video: [] },
+    action
+) => {
+    const { payload, type } = action
+
+    switch (type) {
+        case CHANNEL_VIDEOS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case CHANNEL_VIDEOS_SUCCESS:
+            return {
+                ...state,
+                videos: payload,
+                loading: false
+            }
+        case CHANNEL_VIDEOS_FAIL:
             return {
                 ...state,
                 loading: false,
