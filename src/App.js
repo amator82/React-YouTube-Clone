@@ -9,6 +9,7 @@ import NotFound from './pages/notFound/NotFound'
 import WatchScreen from './pages/watchScreen/WatchScreen'
 import SearchPage from './pages/searchPage/SearchPage'
 import SubscriptionsPage from './pages/subsctiptionsPage/SubscriptionsPage'
+import ChannelPage from './pages/channelPage/ChannelPage'
 
 import MainLayout from './layouts/MainLayout'
 import HomeLayout from './layouts/HomeLayout'
@@ -37,7 +38,10 @@ const App = () => {
                         path='feed/subscriptions'
                         element={<SubscriptionsPage />}
                     />
-                    <Route path='channel/:channelId' element={'Channel Id'} />
+                    <Route
+                        path='channel/:channelId'
+                        element={<ChannelPage />}
+                    />
                 </Route>
                 <Route path='auth' element={<Login />} />
                 <Route path='*' element={<NotFound />} />
