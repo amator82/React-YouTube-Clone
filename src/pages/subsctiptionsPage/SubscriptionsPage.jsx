@@ -14,7 +14,6 @@ const SubscriptionsPage = () => {
     const { loading, videos } = useSelector(
         (state) => state.subscriptionsChannel
     )
-    console.log(useSelector((state) => state.subscriptionsChannel))
 
     useEffect(() => {
         dispatch(getSubscribedChannels())
