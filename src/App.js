@@ -33,7 +33,11 @@ const App = () => {
                     <Route path='' element={<Home />} />
                     <Route path='search/:query' element={<SearchPage />} />
                     <Route path='watch/:id' element={<WatchScreen />} />
-                    <Route path='feed/subscriptions' element={<SubscriptionsPage />} />
+                    <Route
+                        path='feed/subscriptions'
+                        element={<SubscriptionsPage />}
+                    />
+                    <Route path='channel/:channelId' element={'Channel Id'} />
                 </Route>
                 <Route path='auth' element={<Login />} />
                 <Route path='*' element={<NotFound />} />

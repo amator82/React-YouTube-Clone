@@ -21,6 +21,9 @@
             width: 100%;
         }
     }
+    &__description {
+        @include line-clamp(2);
+    }
     &__duration {
         position: absolute;
         bottom: 0.375rem;
@@ -36,9 +39,6 @@
     &__title {
         font-size: 0.95rem;
         letter-spacing: 0.3px;
-        @include line-clamp(2);
-    }
-    &__desc {
         @include line-clamp(2);
     }
     &__channel {
@@ -70,7 +70,7 @@
                 font-size: 0.9rem;
             }
         }
-        &__desc {
+        &__description {
             display: none;
         }
         &__title {

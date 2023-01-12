@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-
+import { Link } from 'react-router-dom'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import request from './../../api'
@@ -12,9 +12,8 @@ import { AiFillEye } from 'react-icons/ai'
 import { Row, Col } from 'react-bootstrap'
 
 import './_videoHorizontal.scss'
-import { Link } from 'react-router-dom'
 
-const VideoHorizonatal = ({ video, searchPage }) => {
+const VideoHorizonatal = ({ video, searchPage, subscriptionPage }) => {
     const {
         id,
         snippet: {
@@ -23,7 +22,8 @@ const VideoHorizonatal = ({ video, searchPage }) => {
             description,
             title,
             publishedAt,
-            thumbnails: { medium }
+            thumbnails: { medium },
+            resourceId
         }
     } = video
 
@@ -31,7 +31,9 @@ const VideoHorizonatal = ({ video, searchPage }) => {
     const [duration, setDuration] = useState(null)
     const [channelIcon, setChannelIcon] = useState(null)
 
-    const isVideo = id.kind === 'youtube#video'
+    const isVideo = !(id.kind === 'youtube#channel' || subscriptionPage)
+
+    const _channelId = resourceId?.channelId || channelId
 
     useEffect(() => {
         const getVideoDetails = async () => {
@@ -46,8 +48,8 @@ const VideoHorizonatal = ({ video, searchPage }) => {
             setDuration(items[0].contentDetails.duration)
             setViews(items[0].statistics.viewCount)
         }
-        getVideoDetails()
-    }, [id])
+        if (isVideo) getVideoDetails()
+    }, [id, isVideo])
 
     useEffect(() => {
         const get_channel_icon = async () => {
@@ -70,13 +72,11 @@ const VideoHorizonatal = ({ video, searchPage }) => {
     const thumbnail = !isVideo && 'videoHorizontal__thumbnail-channel'
 
     return (
-        <Link
-            to={isVideo ? `/watch/${id.videoId}` : `/channel/${id.channelId}`}
-        >
+        <Link to={isVideo ? `/watch/${id.videoId}` : `/channel/${_channelId}`}>
             <Row className='videoHorizontal mx-1 mb-1 py-2'>
                 <Col
                     xs={6}
-                    md={searchPage ? 4 : 6}
+                    md={searchPage || subscriptionPage ? 4 : 6}
                     className='videoHorizontal__left'
                 >
                     <LazyLoadImage
@@ -93,14 +93,14 @@ const VideoHorizonatal = ({ video, searchPage }) => {
                 </Col>
                 <Col
                     xs={6}
-                    md={searchPage ? 8 : 6}
+                    md={searchPage || subscriptionPage ? 8 : 6}
                     className='videoHorizontal__right p-0'
                 >
                     <div className='videoHorizontal__title mb-1'>{title}</div>
                     {isVideo && (
                         <div className='videoHorizontal__details'>
                             <span>
-                                <AiFillEye /> {numeral(views).format('0.a')}{' '}
+                                <AiFillEye /> {numeral(views).format('0.a')}
                                 Views
                             </span>
                             <span className='video__date'>
@@ -108,7 +108,11 @@ const VideoHorizonatal = ({ video, searchPage }) => {
                             </span>
                         </div>
                     )}
-                    {searchPage && <p className='mt-1'>{description}</p>}
+                    {(searchPage || subscriptionPage) && (
+                        <p className='mt-1 videoHorizontal__description'>
+                            {description}
+                        </p>
+                    )}
                     <div className='videoHorizontal__channel d-flex align-items-center'>
                         {isVideo && (
                             <LazyLoadImage
@@ -118,6 +122,11 @@ const VideoHorizonatal = ({ video, searchPage }) => {
                         )}
                         <span>{channelTitle}</span>
                     </div>
+                    {subscriptionPage && (
+                        <p className='mt-2'>
+                            {video.contentDetails.totalItemCount} Videos
+                        </p>
+                    )}
                 </Col>
             </Row>
         </Link>

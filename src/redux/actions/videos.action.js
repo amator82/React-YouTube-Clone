@@ -167,7 +167,7 @@ export const getVideosBySearch = (keyword) => async (dispatch) => {
     }
 }
 
-export const getSubscriptionChannel = (id) => async (dispatch, getState) => {
+export const getSubscribedChannels  = () => async (dispatch, getState) => {
     dispatch({
         type: SUBSCRIPTIONS_CHANNEL_REQUEST
     })
@@ -185,7 +185,7 @@ export const getSubscriptionChannel = (id) => async (dispatch, getState) => {
 
         dispatch({
             type: SUBSCRIPTIONS_CHANNEL_SUCCESS,
-            payload: data.items.length
+            payload: data.items
         })
     } catch (error) {
         console.log(
