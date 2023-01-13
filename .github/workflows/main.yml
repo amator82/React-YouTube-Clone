@@ -2,7 +2,7 @@ name: Firebase Deployment
 
 on:
     push:
-        -branches:
+        branches:
             - master
 
 jobs:
@@ -11,26 +11,26 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name : get the source code
+            - name: get the source code
               uses: actions/checkout@v3
-              
-            - name : install node
+
+            - name: install node
               uses: actions/setup-node@v3
               with:
                   node-version: 16
-                
-            - name : install node packages
-                run: npm i
+
+            - name: install node packages
+              run: npm i
 
             - name: Build
-                run: npm run build
-                env: 
+              run: npm run build
+              env:
                   CI: false
+                  REACT_APP_YOUTUBE_API_KEY: ${{secrets.REACT_APP_YOUTUBE_API_KEY}}
 
             - name: Deploy to Firebase
               uses: w9jds/firebase-action@master
-              with: 
-                args: deploy --only hosting
-              env: 
-                FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
-
+              with:
+                  args: deploy --only hosting
+              env:
+                  FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
