@@ -3,16 +3,11 @@ import 'firebase/compat/auth'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_YOUTUBE_API_KEY,
-    // authDomain: 'react--clone-7b813.firebaseapp.com',
-    // projectId: 'react--clone-7b813',
-    // storageBucket: 'react--clone-7b813.appspot.com',
-    // messagingSenderId: '7583969892',
-    // appId: '1:7583969892:web:61f128be66aee7db85e571'
-    authDomain: "ytcloneam82.firebaseapp.com",
-    projectId: "ytcloneam82",
-    storageBucket: "ytcloneam82.appspot.com",
-    messagingSenderId: "359388639067",
-    appId: "1:359388639067:web:1fb9c3d76a83e3a240747e"
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MES_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID
 }
 
 firebase.initializeApp(firebaseConfig)
