@@ -7,6 +7,7 @@ import { getSubscribedChannels } from './../../redux/actions/videos.action'
 import { Container } from 'react-bootstrap'
 import './subscriptionsPage.scss'
 import VideoHorizonatal from '../../components/videoHorizontal/VideoHorizonatal'
+import SubscriptionsPageSceleton from './SubscriptionsPageSceleton'
 
 const SubscriptionsPage = () => {
     const dispatch = useDispatch()
@@ -29,7 +30,9 @@ const SubscriptionsPage = () => {
                           subscriptionPage
                       />
                   ))
-                : ''}
+                : [...new Array(6)].map((_, index) => (
+                      <SubscriptionsPageSceleton key={index} />
+                  ))}
         </Container>
     )
 }
