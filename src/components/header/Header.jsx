@@ -25,21 +25,21 @@ const Header = ({ handleOpenSidebar }) => {
                 size={26}
                 onClick={() => handleOpenSidebar()}
             />
-            <Link to='/'>
+            <Link to='/' className='header__logo'>
                 <img
-                    className='header__logo'
                     src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/800px-YouTube_full-color_icon_%282017%29.svg.png'
                     alt='logo'
                 />
             </Link>
-            <form onSubmit={handleSubmit}>
+            <form className='header__form' onSubmit={handleSubmit}>
                 <input
+                    className='header__input'
                     type='text'
                     placeholder='Search'
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                 />
-                <button type='submit'>
+                <button className='header__submit' type='submit'>
                     <AiOutlineSearch size={22} />
                 </button>
             </form>
