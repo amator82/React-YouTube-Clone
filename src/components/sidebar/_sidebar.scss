@@ -7,15 +7,9 @@
     display: flex;
     flex-direction: column;
     background-color: $black-primary;
-    width: 250px;
-    // height: 90vh;
-    padding-top: 2rem;
     transition: transform 0.2s ease-in;
     &.open {
         transform: translateX(0);
-    }
-    @media (max-width: $breakpoint-medium) {
-        width: 90px;
     }
     @media (max-width: $breakpoint-small) {
         position: fixed;
@@ -23,13 +17,14 @@
         transform: translateX(-100%);
     }
     &__list {
+        margin-bottom: 0;
         padding-left: 0;
     }
     &__link {
         cursor: pointer;
         display: flex;
         align-items: center;
-        padding: 0.8rem 1.5rem;
+        padding: 0.8rem 1.65rem;
         transition: background-color 0.3s ease 0s;
         span {
             margin-left: 1rem;
