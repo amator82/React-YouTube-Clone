@@ -12,9 +12,8 @@ import {
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import { Col } from 'react-bootstrap'
-
 import VideoSkeleton from './../../components/video/VideoSkeleton'
+import './_home.scss'
 
 const videoSkeletons = [...new Array(15)].map((_, index) => (
     <VideoSkeleton key={index} />
@@ -42,7 +41,6 @@ const Home = () => {
         <>
             <CategoriesBar />
             <InfiniteScroll
-                className='row'
                 dataLength={videos.length}
                 next={fetchData}
                 hasMore={true}
@@ -51,13 +49,12 @@ const Home = () => {
                 }
             >
                 {!loading ? (
-                    videos.map((video) => {
-                        return (
-                            <Col lg={3} md={4} key={video.id}>
-                                <Video video={video} />
-                            </Col>
-                        )
-                    })
+                    <div className='home__videos'>
+                        {videos.map((video) => {
+                            console.log(video)
+                            return <Video key={video.id} video={video} />
+                        })}
+                    </div>
                 ) : (
                     <div className='skeletons'>{videoSkeletons}</div>
                 )}

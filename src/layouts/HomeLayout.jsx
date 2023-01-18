@@ -20,10 +20,8 @@ const HomeLayout = () => {
                     handleOpenSidebar={handleOpenSidebar}
                     openSidebar={openSidebar}
                 />
-                <Container fluid className='app__main'>
-                    <Container>
-                        <Outlet />
-                    </Container>
+                <Container className='app__main'>
+                    <Outlet />
                 </Container>
             </div>
         </>
