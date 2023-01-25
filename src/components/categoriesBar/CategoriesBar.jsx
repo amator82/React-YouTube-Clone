@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, memo } from 'react'
 
 import { useDispatch } from 'react-redux'
 
@@ -27,7 +27,7 @@ const keywords = [
     'Shwetabh'
 ]
 
-const CategoriesBar = () => {
+const CategoriesBar = memo(() => {
     const dispatch = useDispatch()
 
     const [activeElement, setActiveElement] = useState('All')
@@ -59,6 +59,6 @@ const CategoriesBar = () => {
             ))}
         </div>
     )
-}
+})
 
 export default CategoriesBar

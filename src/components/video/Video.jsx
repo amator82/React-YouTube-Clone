@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -96,4 +96,4 @@ const Video = ({ video, channelPage }) => {
     )
 }
 
-export default Video
+export default memo( Video)

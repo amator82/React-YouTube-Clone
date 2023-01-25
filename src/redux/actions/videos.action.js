@@ -16,7 +16,7 @@ import {
     SUBSCRIPTIONS_CHANNEL_FAIL,
     CHANNEL_VIDEOS_REQUEST,
     CHANNEL_VIDEOS_SUCCESS,
-    CHANNEL_VIDEOS_FAIL
+    CHANNEL_VIDEOS_FAIL,
 } from '../actionType'
 import request from '../../api'
 
@@ -44,7 +44,7 @@ export const getPopularVideos = () => async (dispatch, getState) => {
             }
         })
     } catch (error) {
-        console.log('Ошибка при получении данных:', error.message)
+        console.log('Get popular videos error:', error.message)
 
         dispatch({
             type: HOME_VIDEOS_FAIL,
