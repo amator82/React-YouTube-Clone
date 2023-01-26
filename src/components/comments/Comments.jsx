@@ -14,6 +14,8 @@ const Comments = ({ videoId, totalComments }) => {
 
     const dispatch = useDispatch()
 
+    const user = useSelector((state) => state.auth?.user)
+
     useEffect(() => {
         dispatch(getCommentsOfVideoId(videoId))
     }, [dispatch, videoId])
@@ -38,7 +40,7 @@ const Comments = ({ videoId, totalComments }) => {
             <div className='comments__body d-flex w-100 my-2'>
                 <img
                     className='channel-videoMetaData__icon rounded-circle mr-3'
-                    src='https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png'
+                    src={user?.photoURL}
                     alt='person logo'
                 />
                 <form onSubmit={handleComment} className='d-flex flex-grow-1'>

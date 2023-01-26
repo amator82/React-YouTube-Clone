@@ -27,7 +27,7 @@ export const login = () => async (dispatch) => {
         }
 
         sessionStorage.setItem('ytc-access-token', accessToken)
-        sessionStorage.setItem('ytc-access-user', JSON.stringify(profile))
+        sessionStorage.setItem('ytc-user', JSON.stringify(profile))
 
         dispatch({
             type: LOGIN_SUCCESS,

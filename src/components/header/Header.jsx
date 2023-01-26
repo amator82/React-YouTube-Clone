@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdNotifications, MdApps } from 'react-icons/md'
+import { useSelector } from 'react-redux'
 
 import './_header.scss'
 
@@ -11,6 +12,8 @@ const Header = ({ handleOpenSidebar }) => {
     const navigate = useNavigate()
 
     const [input, setInput] = useState('')
+
+    const user = useSelector((state) => state.auth?.user)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -47,7 +50,7 @@ const Header = ({ handleOpenSidebar }) => {
                 <MdNotifications size={28} />
                 <MdApps size={28} />
                 <img
-                    src='https://cdn.icon-icons.com/icons2/2643/PNG/512/male_boy_person_people_avatar_icon_159358.png'
+                    src={user?.photoURL}
                     alt='avatar'
                     className='header__avatar'
                 />
