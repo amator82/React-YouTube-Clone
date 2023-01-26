@@ -6,6 +6,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import VideoMetaData from '../../components/videoMetaData/VideoMetaData'
 import VideoHorizonatal from './../../components/videoHorizontal/VideoHorizonatal'
 import Comments from '../../components/comments/Comments'
+import VideoHorizontalSceleton from './../../components/videoHorizontal/VideoHorizontalSceleton'
+
+import { Helmet } from 'react-helmet'
 
 import {
     getRelatedVideos,
@@ -14,7 +17,6 @@ import {
 
 import { Row, Col } from 'react-bootstrap'
 import './watchScreen.scss'
-import VideoHorizontalSceleton from './../../components/videoHorizontal/VideoHorizontalSceleton'
 
 const WatchScreen = () => {
     const dispatch = useDispatch()
@@ -33,6 +35,9 @@ const WatchScreen = () => {
 
     return (
         <Row>
+            <Helmet>
+                <title>{video?.snippet?.title}</title>
+            </Helmet>
             <Col lg={8}>
                 <div className='watchscreen__player'>
                     <iframe
@@ -57,16 +62,16 @@ const WatchScreen = () => {
             <Col lg={4}>
                 {!loading
                     ? videos
-                        ?.filter((video) => video.snippet)
-                        ?.map((video) => (
-                            <VideoHorizonatal
-                                video={video}
-                                key={video.id.videoId}
-                            />
-                        ))
+                          ?.filter((video) => video.snippet)
+                          ?.map((video) => (
+                              <VideoHorizonatal
+                                  video={video}
+                                  key={video.id.videoId}
+                              />
+                          ))
                     : [...new Array(7)].map((_, index) => (
-                        <VideoHorizontalSceleton key={index} />
-                    ))}
+                          <VideoHorizontalSceleton key={index} />
+                      ))}
             </Col>
         </Row>
     )

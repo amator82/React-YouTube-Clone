@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { MdThumbUp } from 'react-icons/md'
 
+import HelmetCustom from '../HelmetCustom'
+
 import {
     checkSubscriptoinStatus,
     getChannelDetails
@@ -35,6 +37,7 @@ const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
 
     return (
         <div className='videoMetaData py-2'>
+            <HelmetCustom title={title} description={description} />
             <div className='videoMetaData__top'>
                 <h5 className='videoMetaData__title'>{title}</h5>
                 <div className='d-flex justify-content-between align-items-center py-1'>
