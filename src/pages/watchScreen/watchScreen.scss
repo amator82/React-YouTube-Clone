@@ -1,8 +1,16 @@
+@import '../../scss/_base.scss';
+
 .watchscreen {
     &__player {
         height: 60vh;
         background-color: #353946;
         width: 100%;
         margin-bottom: 2rem;
+        @media (max-width:$breakpoint-medium){
+            height: 45vh;
+        }
+        @media (max-width:$breakpoint-small){
+            height: 30vh;
+        }
     }
 }
