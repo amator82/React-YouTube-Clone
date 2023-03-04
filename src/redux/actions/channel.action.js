@@ -5,7 +5,7 @@ import {
     SET_SUBSCRIPTION_STATUS
 } from './../actionType'
 
-import request from './../../api'
+import request from './../../api.ts'
 
 export const getChannelDetails = (id) => async (dispatch) => {
     try {

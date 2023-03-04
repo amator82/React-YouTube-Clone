@@ -1,27 +1,21 @@
 import firebase from 'firebase/compat/app'
 import auth from '../../firebase'
+import { AuthAction, AuthActionTypes, Profile } from '../../types/auth'
+import { Dispatch } from 'redux'
 
-import {
-    LOGIN_REQUEST,
-    LOGIN_SUCCESS,
-    LOAD_PROFILE,
-    LOGIN_FAIL,
-    LOG_OUT
-} from './../actionType'
-
-export const login = () => async (dispatch) => {
+export const login = () => async (dispatch: Dispatch<AuthAction>) => {
     try {
         dispatch({
-            type: LOGIN_REQUEST
+            type: AuthActionTypes.LOGIN_REQUEST
         })
 
         const provider = new firebase.auth.GoogleAuthProvider()
         provider.addScope('https://www.googleapis.com/auth/youtube.force-ssl')
 
-        const res = await auth.signInWithPopup(provider)
+        const res: any = await auth.signInWithPopup(provider)
         const accessToken = res.credential.accessToken
 
-        const profile = {
+        const profile: Profile = {
             name: res.additionalUserInfo.profile.name,
             photoURL: res.additionalUserInfo.profile.picture
         }
@@ -30,27 +24,27 @@ export const login = () => async (dispatch) => {
         sessionStorage.setItem('ytc-user', JSON.stringify(profile))
 
         dispatch({
-            type: LOGIN_SUCCESS,
+            type: AuthActionTypes.LOGIN_SUCCESS,
             payload: accessToken
         })
 
         dispatch({
-            type: LOAD_PROFILE,
+            type: AuthActionTypes.LOAD_PROFILE,
             payload: profile
         })
     } catch (error) {
         console.log(error.message)
         dispatch({
-            type: LOGIN_FAIL,
+            type: AuthActionTypes.LOGIN_FAIL,
             payload: error.message
         })
     }
 }
 
-export const log_out = () => async (dispatch) => {
+export const log_out = () => async (dispatch: Dispatch<AuthAction>) => {
     await auth.signOut()
     dispatch({
-        type: LOG_OUT
+        type: AuthActionTypes.LOG_OUT
     })
 
     sessionStorage.removeItem('ytc-access-token')

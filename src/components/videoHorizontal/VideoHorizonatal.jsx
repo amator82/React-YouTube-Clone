@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-import request from './../../api'
+import request from './../../api.ts'
 
 import moment from 'moment'
 import numeral from 'numeral'

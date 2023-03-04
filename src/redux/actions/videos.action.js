@@ -18,7 +18,7 @@ import {
     CHANNEL_VIDEOS_SUCCESS,
     CHANNEL_VIDEOS_FAIL,
 } from '../actionType'
-import request from '../../api'
+import request from '../../api.ts'
 
 export const getPopularVideos = () => async (dispatch, getState) => {
     try {

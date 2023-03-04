@@ -1,7 +1,16 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
 
-const firebaseConfig = {
+interface FirebaseConfig {
+    apiKey: string | undefined
+    authDomain: string | undefined
+    projectId: string | undefined
+    storageBucket: string | undefined
+    messagingSenderId: string | undefined
+    appId: string | undefined
+}
+
+const firebaseConfig: FirebaseConfig = {
     apiKey: process.env.REACT_APP_YOUTUBE_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
     projectId: process.env.REACT_APP_PROJECT_ID,
