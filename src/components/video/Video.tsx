@@ -1,9 +1,9 @@
-import React, { useState, useEffect, memo } from 'react'
+import React, { useState, useEffect, memo, FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-import request from './../../api.ts'
+import request from '../../api'
 
 import moment from 'moment'
 import numeral from 'numeral'
@@ -12,7 +12,12 @@ import { AiFillEye } from 'react-icons/ai'
 
 import './_video.scss'
 
-const Video = ({ video, channelPage }) => {
+type VideoProps = {
+    video: any
+    channelPage?: any
+}
+
+const Video: FC<VideoProps> = ({ video, channelPage }) => {
     const navigate = useNavigate()
 
     const {
@@ -29,7 +34,7 @@ const Video = ({ video, channelPage }) => {
 
     const [views, setViews] = useState(null)
     const [duration, setDuration] = useState(null)
-    const [channelIcon, setChannelIcon] = useState(null)
+    const [channelIcon, setChannelIcon] = useState<any | null>(null)
 
     const seconds = moment.duration(duration).asSeconds()
     const _duration = moment.utc(seconds * 1000).format('mm:ss')
@@ -67,7 +72,7 @@ const Video = ({ video, channelPage }) => {
         get_channel_icon()
     }, [channelId])
 
-    const handleVideoClick = () => {
+    const handleVideoClick = (): void => {
         navigate(`/watch/${_videoId}`)
     }
 
@@ -96,4 +101,4 @@ const Video = ({ video, channelPage }) => {
     )
 }
 
-export default memo( Video)
+export default memo(Video)

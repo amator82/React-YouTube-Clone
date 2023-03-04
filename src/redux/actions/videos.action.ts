@@ -18,71 +18,39 @@ import {
 import request from '../../api'
 import { ChannelVideosTypes } from '../../types/chanelVideos'
 
-export const getPopularVideos = () => async (dispatch: any, getState: any) => {
-    try {
-        dispatch({
-            type: HOME_VIDEOS_REQUEST
-        })
-        const { data } = await request('/videos', {
-            params: {
-                part: 'snippet,contentDetails,statistics',
-                chart: 'mostPopular',
-                regionCode: 'ua',
-                maxResults: 15,
-                pageToken: getState().homeVideos.nextPageToken
-            }
-        })
+export const getVideosByCategory =
+    (keyword: any) => async (dispatch: any, getState: any) => {
+        try {
+            dispatch({
+                type: HOME_VIDEOS_REQUEST
+            })
 
-        dispatch({
-            type: HOME_VIDEOS_SUCCESS,
-            payload: {
-                videos: data.items,
-                nextPageToken: data.nextPageToken,
-                category: 'All'
-            }
-        })
-    } catch (error) {
-        console.log('Get popular videos error:', error.message)
+            const { data } = await request('/search', {
+                params: {
+                    part: 'snippet',
+                    maxResults: 15,
+                    pageToken: getState().homeVideos.nextPageToken,
+                    q: keyword,
+                    type: 'video'
+                }
+            })
 
-        dispatch({
-            type: HOME_VIDEOS_FAIL,
-            payload: error.message
-        })
+            dispatch({
+                type: HOME_VIDEOS_SUCCESS,
+                payload: {
+                    videos: data.items,
+                    nextPageToken: data.nextPageToken,
+                    category: keyword
+                }
+            })
+        } catch (error) {
+            console.log(error.message, 'Get videos by category error ')
+            dispatch({
+                type: HOME_VIDEOS_FAIL,
+                payload: error.message
+            })
+        }
     }
-}
-
-export const getVideosByCategory = (keyword: any) => async (dispatch: any, getState: any) => {
-    try {
-        dispatch({
-            type: HOME_VIDEOS_REQUEST
-        })
-
-        const { data } = await request('/search', {
-            params: {
-                part: 'snippet',
-                maxResults: 15,
-                pageToken: getState().homeVideos.nextPageToken,
-                q: keyword,
-                type: 'video'
-            }
-        })
-
-        dispatch({
-            type: HOME_VIDEOS_SUCCESS,
-            payload: {
-                videos: data.items,
-                nextPageToken: data.nextPageToken,
-                category: keyword
-            }
-        })
-    } catch (error) {
-        console.log(error.message, 'Get videos by category error ')
-        dispatch({
-            type: HOME_VIDEOS_FAIL,
-            payload: error.message
-        })
-    }
-}
 
 export const getVideoById = (id: any) => async (dispatch: any) => {
     try {
@@ -168,78 +136,80 @@ export const getVideosBySearch = (keyword: any) => async (dispatch: any) => {
     }
 }
 
-export const getSubscribedChannels = () => async (dispatch: any, getState: any) => {
-    dispatch({
-        type: SUBSCRIPTIONS_CHANNEL_REQUEST
-    })
-
-    try {
-        const { data } = await request('/subscriptions', {
-            params: {
-                part: 'snippet,contentDetails',
-                mine: true
-            },
-            headers: {
-                Authorization: `Bearer ${getState().auth.accessToken}`
-            }
+export const getSubscribedChannels =
+    () => async (dispatch: any, getState: any) => {
+        dispatch({
+            type: SUBSCRIPTIONS_CHANNEL_REQUEST
         })
 
-        dispatch({
-            type: SUBSCRIPTIONS_CHANNEL_SUCCESS,
-            payload: data.items
-        })
-    } catch (error) {
-        console.log(
-            error.response.data,
-            'Get subscription channel request error'
-        )
-        dispatch({
-            type: SUBSCRIPTIONS_CHANNEL_FAIL,
-            payload: error.response.data
-        })
+        try {
+            const { data } = await request('/subscriptions', {
+                params: {
+                    part: 'snippet,contentDetails',
+                    mine: true
+                },
+                headers: {
+                    Authorization: `Bearer ${getState().auth.accessToken}`
+                }
+            })
+
+            dispatch({
+                type: SUBSCRIPTIONS_CHANNEL_SUCCESS,
+                payload: data.items
+            })
+        } catch (error) {
+            console.log(
+                error.response.data,
+                'Get subscription channel request error'
+            )
+            dispatch({
+                type: SUBSCRIPTIONS_CHANNEL_FAIL,
+                payload: error.response.data
+            })
+        }
     }
-}
 
-export const getVideosByChannelId = (id: string | undefined) => async (dispatch: any) => {
-    dispatch({
-        type: ChannelVideosTypes.CHANNEL_VIDEOS_REQUEST
-    })
-
-    try {
-        //? Get upload playlist id
-        const {
-            data: { items }
-        } = await request('/channels', {
-            params: {
-                part: 'contentDetails',
-                id
-            }
-        })
-
-        const uploadPlaylistId =
-            items[0].contentDetails.relatedPlaylists.uploads
-
-        //? Get the videos using the Id
-        const { data } = await request('/playlistItems', {
-            params: {
-                part: 'contentDetails,snippet',
-                playlistId: uploadPlaylistId,
-                maxResults: 15
-            }
-        })
-
+export const getVideosByChannelId =
+    (id: string | undefined) => async (dispatch: any) => {
         dispatch({
-            type: ChannelVideosTypes.CHANNEL_VIDEOS_SUCCESS,
-            payload: data.items
+            type: ChannelVideosTypes.CHANNEL_VIDEOS_REQUEST
         })
-    } catch (error) {
-        console.log(
-            error.response.data,
-            'Get videos by channel ID request error'
-        )
-        dispatch({
-            type: ChannelVideosTypes.CHANNEL_VIDEOS_FAIL,
-            payload: error.response.data
-        })
+
+        try {
+            //? Get upload playlist id
+            const {
+                data: { items }
+            } = await request('/channels', {
+                params: {
+                    part: 'contentDetails',
+                    id
+                }
+            })
+
+            const uploadPlaylistId =
+                items[0].contentDetails.relatedPlaylists.uploads
+
+            //? Get the videos using the Id
+            const { data } = await request('/playlistItems', {
+                params: {
+                    part: 'contentDetails,snippet',
+                    playlistId: uploadPlaylistId,
+                    maxResults: 15
+                }
+            })
+
+            dispatch({
+                type: ChannelVideosTypes.CHANNEL_VIDEOS_SUCCESS,
+                payload: data.items
+            })
+        } catch (error) {
+            console.log(
+                error.response.data,
+                'Get videos by channel ID request error'
+            )
+            dispatch({
+                type: ChannelVideosTypes.CHANNEL_VIDEOS_FAIL,
+                payload: error.response.data
+            })
+        }
     }
-}

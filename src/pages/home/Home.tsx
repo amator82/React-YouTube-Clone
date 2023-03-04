@@ -1,34 +1,33 @@
-import React, { useEffect, useRef, memo } from 'react'
+import React, { useEffect, useRef, FC } from 'react'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import { useDispatch, useSelector } from 'react-redux'
+import CategoriesBar from '../../components/categoriesBar/CategoriesBar'
+import Video from '../../components/video/Video'
 
-import CategoriesBar from './../../components/categoriesBar/CategoriesBar'
-import Video from './../../components/video/Video'
-
-import {
-    getPopularVideos,
-    getVideosByCategory
-} from '../../redux/actions/videos.action'
+import { useAction } from './../../hooks/useAction'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
 
 import './_home.scss'
 
-const Home = () => {
-    const dispatch = useDispatch()
+const Home: FC = () => {
+    const { getPopularVideos, getVideosByCategory } = useAction()
     const isLoading = useRef(true)
 
     useEffect(() => {
-        dispatch(getPopularVideos())
+        getPopularVideos()
         isLoading.current = false
-    }, [dispatch])
+    }, [])
 
-    const { videos, activeCategory } = useSelector((state) => state.homeVideos)
+    const { videos, activeCategory } = useTypedSelector(
+        (state) => state.popularVideos
+    )
 
     const fetchData = () => {
-        if (activeCategory === 'All') dispatch(getPopularVideos())
-        else {
-            dispatch(getVideosByCategory(activeCategory))
+        if (activeCategory === 'All') {
+            getPopularVideos()
+        } else {
+            getVideosByCategory(activeCategory)
         }
     }
 

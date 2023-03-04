@@ -1,8 +1,5 @@
 import { ChannelVideosTypes } from '../../types/chanelVideos'
 import {
-    HOME_VIDEOS_REQUEST,
-    HOME_VIDEOS_SUCCESS,
-    HOME_VIDEOS_FAIL,
     SELECTED_VIDEO_REQUEST,
     SELECTED_VIDEO_SUCCESS,
     SELECTED_VIDEO_FAIL,
@@ -14,47 +11,8 @@ import {
     SEARCH_VIDEOS_FAIL,
     SUBSCRIPTIONS_CHANNEL_REQUEST,
     SUBSCRIPTIONS_CHANNEL_SUCCESS,
-    SUBSCRIPTIONS_CHANNEL_FAIL,
+    SUBSCRIPTIONS_CHANNEL_FAIL
 } from '../actionType'
-
-export const homeVideosReducer = (
-    state = {
-        videos: [],
-        loading: false,
-        nextPageToken: null,
-        activeCategory: 'All'
-    },
-    action: any
-) => {
-    const { type, payload } = action
-
-    switch (type) {
-        case HOME_VIDEOS_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        case HOME_VIDEOS_SUCCESS:
-            return {
-                ...state,
-                videos:
-                    state.activeCategory === payload.category
-                        ? [...state.videos, ...payload.videos]
-                        : [...payload.videos],
-                loading: false,
-                nextPageToken: payload.nextPageToken,
-                activeCategory: payload.category
-            }
-        case HOME_VIDEOS_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: payload
-            }
-        default:
-            return state
-    }
-}
 
 export const selectedVideoReducer = (
     state = { loading: true, video: null },

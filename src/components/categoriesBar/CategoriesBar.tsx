@@ -1,13 +1,10 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, FC } from 'react'
 
-import { useDispatch } from 'react-redux'
-
-import { getVideosByCategory } from '../../redux/actions/videos.action'
+import { useAction } from './../../hooks/useAction'
 
 import './_categoriesBar.scss'
-import { getPopularVideos } from './../../redux/actions/videos.action'
 
-const keywords = [
+const keywords: string[] = [
     'All',
     'React js',
     'Angular js',
@@ -27,18 +24,18 @@ const keywords = [
     'Shwetabh'
 ]
 
-const CategoriesBar = memo(() => {
-    const dispatch = useDispatch()
+const CategoriesBar: FC = memo(() => {
+    const { getPopularVideos, getVideosByCategory } = useAction()
 
     const [activeElement, setActiveElement] = useState('All')
 
-    const handleCategoryClick = (category) => {
+    const handleCategoryClick = (category: string): void => {
         setActiveElement(category)
 
         if (category === 'All') {
-            dispatch(getPopularVideos())
+            getPopularVideos()
         } else {
-            dispatch(getVideosByCategory(category))
+            getVideosByCategory(category)
         }
     }
 
