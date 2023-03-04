@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useTypedSelector } from '../../hooks/useTypedSelector'
@@ -6,13 +6,13 @@ import { useAction } from '../../hooks/useAction'
 
 import './_login.scss'
 
-const Login = () => {
+const Login: FC = () => {
     const { login } = useAction()
     const navigate = useNavigate()
 
     const { accessToken } = useTypedSelector((state) => state.auth)
 
-    const handleLogin = () => {
+    const handleLogin = (): void => {
         login()
     }
 
