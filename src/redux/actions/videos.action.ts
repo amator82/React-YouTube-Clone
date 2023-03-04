@@ -13,14 +13,12 @@ import {
     SEARCH_VIDEOS_FAIL,
     SUBSCRIPTIONS_CHANNEL_REQUEST,
     SUBSCRIPTIONS_CHANNEL_SUCCESS,
-    SUBSCRIPTIONS_CHANNEL_FAIL,
-    CHANNEL_VIDEOS_REQUEST,
-    CHANNEL_VIDEOS_SUCCESS,
-    CHANNEL_VIDEOS_FAIL,
+    SUBSCRIPTIONS_CHANNEL_FAIL
 } from '../actionType'
-import request from '../../api.ts'
+import request from '../../api'
+import { ChannelVideosTypes } from '../../types/chanelVideos'
 
-export const getPopularVideos = () => async (dispatch, getState) => {
+export const getPopularVideos = () => async (dispatch: any, getState: any) => {
     try {
         dispatch({
             type: HOME_VIDEOS_REQUEST
@@ -53,7 +51,7 @@ export const getPopularVideos = () => async (dispatch, getState) => {
     }
 }
 
-export const getVideosByCategory = (keyword) => async (dispatch, getState) => {
+export const getVideosByCategory = (keyword: any) => async (dispatch: any, getState: any) => {
     try {
         dispatch({
             type: HOME_VIDEOS_REQUEST
@@ -86,7 +84,7 @@ export const getVideosByCategory = (keyword) => async (dispatch, getState) => {
     }
 }
 
-export const getVideoById = (id) => async (dispatch) => {
+export const getVideoById = (id: any) => async (dispatch: any) => {
     try {
         dispatch({
             type: SELECTED_VIDEO_REQUEST
@@ -113,7 +111,7 @@ export const getVideoById = (id) => async (dispatch) => {
     }
 }
 
-export const getRelatedVideos = (id) => async (dispatch) => {
+export const getRelatedVideos = (id: any) => async (dispatch: any) => {
     try {
         dispatch({
             type: RELATED_VIDEOS_REQUEST
@@ -142,7 +140,7 @@ export const getRelatedVideos = (id) => async (dispatch) => {
     }
 }
 
-export const getVideosBySearch = (keyword) => async (dispatch) => {
+export const getVideosBySearch = (keyword: any) => async (dispatch: any) => {
     try {
         dispatch({
             type: SEARCH_VIDEOS_REQUEST
@@ -170,7 +168,7 @@ export const getVideosBySearch = (keyword) => async (dispatch) => {
     }
 }
 
-export const getSubscribedChannels = () => async (dispatch, getState) => {
+export const getSubscribedChannels = () => async (dispatch: any, getState: any) => {
     dispatch({
         type: SUBSCRIPTIONS_CHANNEL_REQUEST
     })
@@ -202,9 +200,9 @@ export const getSubscribedChannels = () => async (dispatch, getState) => {
     }
 }
 
-export const getVideosByChannelId = (id) => async (dispatch) => {
+export const getVideosByChannelId = (id: string | undefined) => async (dispatch: any) => {
     dispatch({
-        type: CHANNEL_VIDEOS_REQUEST
+        type: ChannelVideosTypes.CHANNEL_VIDEOS_REQUEST
     })
 
     try {
@@ -231,7 +229,7 @@ export const getVideosByChannelId = (id) => async (dispatch) => {
         })
 
         dispatch({
-            type: CHANNEL_VIDEOS_SUCCESS,
+            type: ChannelVideosTypes.CHANNEL_VIDEOS_SUCCESS,
             payload: data.items
         })
     } catch (error) {
@@ -240,7 +238,7 @@ export const getVideosByChannelId = (id) => async (dispatch) => {
             'Get videos by channel ID request error'
         )
         dispatch({
-            type: CHANNEL_VIDEOS_FAIL,
+            type: ChannelVideosTypes.CHANNEL_VIDEOS_FAIL,
             payload: error.response.data
         })
     }

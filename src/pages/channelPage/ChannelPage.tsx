@@ -1,33 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { useDispatch, useSelector } from 'react-redux'
-
 import ChannelPageSceleton from './ChannelPageSceleton'
-import Video from './../../components/video/Video'
-
-import { getVideosByChannelId } from './../../redux/actions/videos.action'
-import { getChannelDetails } from './../../redux/actions/channel.action'
+import Video from '../../components/video/Video'
 
 import numeral from 'numeral'
 
 import { Col, Container, Row } from 'react-bootstrap'
 import './channelPage.scss'
+import { useAction } from './../../hooks/useAction'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
 
-const ChannelPage = () => {
-    const dispatch = useDispatch()
+const ChannelPage: FC = () => {
+    const { getChannelDetails, getVideosByChannelId } = useAction()
 
-    const { channelId } = useParams()
+    const { channelId } = useParams<{ channelId?: string }>()
 
     useEffect(() => {
-        dispatch(getVideosByChannelId(channelId))
-        dispatch(getChannelDetails(channelId))
-    }, [dispatch, channelId])
+        getVideosByChannelId(channelId)
+        getChannelDetails(channelId)
+    }, [channelId])
 
-    const { videos, loading } = useSelector((state) => state.channelVideos)
-    const { snippet, statistics } = useSelector(
+    const { videos, loading } = useTypedSelector((state) => state.channelVideos)
+    const { snippet, statistics } = useTypedSelector(
         (state) => state.channelDetails.channel
     )
+
     return (
         <>
             <div className='xp-7 py-2 my-2 d-flex justify-content-between align-items-center channelHeader'>
@@ -36,7 +34,7 @@ const ChannelPage = () => {
                     <div className='channelHeader__details'>
                         <h3>{snippet?.title}</h3>
                         <span>
-                            {numeral(statistics?.subscriberCount).format('0.a')}{' '}
+                            {numeral(statistics?.subscriberCount).format('0.a')}
                             subscribers
                         </span>
                     </div>
@@ -45,7 +43,7 @@ const ChannelPage = () => {
             <Container>
                 <Row className='mt-2'>
                     {!loading
-                        ? videos?.map((video) => (
+                        ? videos?.map((video: any) => (
                               <Col md={4} lg={3} key={video.id}>
                                   <Video video={video} channelPage />
                               </Col>

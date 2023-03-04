@@ -3,7 +3,7 @@ import request from '../../api'
 import { ChannelAction, ChannelTypes } from '../../types/channel'
 
 export const getChannelDetails =
-    (id: string) => async (dispatch: Dispatch<ChannelAction>) => {
+    (id: string | undefined) => async (dispatch: Dispatch<ChannelAction>) => {
         try {
             dispatch({
                 type: ChannelTypes.CHANNEL_DETAILS_REQUEST

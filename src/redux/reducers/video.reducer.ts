@@ -1,3 +1,4 @@
+import { ChannelVideosTypes } from '../../types/chanelVideos'
 import {
     HOME_VIDEOS_REQUEST,
     HOME_VIDEOS_SUCCESS,
@@ -14,10 +15,7 @@ import {
     SUBSCRIPTIONS_CHANNEL_REQUEST,
     SUBSCRIPTIONS_CHANNEL_SUCCESS,
     SUBSCRIPTIONS_CHANNEL_FAIL,
-    CHANNEL_VIDEOS_REQUEST,
-    CHANNEL_VIDEOS_SUCCESS,
-    CHANNEL_VIDEOS_FAIL
-} from './../actionType'
+} from '../actionType'
 
 export const homeVideosReducer = (
     state = {
@@ -26,7 +24,7 @@ export const homeVideosReducer = (
         nextPageToken: null,
         activeCategory: 'All'
     },
-    action
+    action: any
 ) => {
     const { type, payload } = action
 
@@ -60,7 +58,7 @@ export const homeVideosReducer = (
 
 export const selectedVideoReducer = (
     state = { loading: true, video: null },
-    action
+    action: any
 ) => {
     const { payload, type } = action
 
@@ -90,7 +88,7 @@ export const selectedVideoReducer = (
 
 export const relatedVideoReducer = (
     state = { loading: true, video: [] },
-    action
+    action: any
 ) => {
     const { payload, type } = action
 
@@ -119,7 +117,7 @@ export const relatedVideoReducer = (
 
 export const searchedVideosReducer = (
     state = { loading: true, video: [] },
-    action
+    action: any
 ) => {
     const { payload, type } = action
 
@@ -148,7 +146,7 @@ export const searchedVideosReducer = (
 
 export const subscriptionsChannelReducer = (
     state = { loading: true, video: [] },
-    action
+    action: any
 ) => {
     const { payload, type } = action
 
@@ -176,24 +174,24 @@ export const subscriptionsChannelReducer = (
 }
 
 export const channelVideosReducer = (
-    state = { loading: true, video: [] },
-    action
+    state = { loading: true, videos: [] },
+    action: any
 ) => {
     const { payload, type } = action
 
     switch (type) {
-        case CHANNEL_VIDEOS_REQUEST:
+        case ChannelVideosTypes.CHANNEL_VIDEOS_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case CHANNEL_VIDEOS_SUCCESS:
+        case ChannelVideosTypes.CHANNEL_VIDEOS_SUCCESS:
             return {
                 ...state,
                 videos: payload,
                 loading: false
             }
-        case CHANNEL_VIDEOS_FAIL:
+        case ChannelVideosTypes.CHANNEL_VIDEOS_FAIL:
             return {
                 ...state,
                 loading: false,
