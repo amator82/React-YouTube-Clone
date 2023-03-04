@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { login } from './../../redux/actions/auth.action'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
+import { useAction } from './../../hooks/useAction'
 
 import './_login.scss'
 
 const Login = () => {
-    const dispatch = useDispatch()
+    const { login } = useAction()
     const navigate = useNavigate()
 
-    const accessToken = useSelector((state) => state.auth.accessToken)
+    const accessToken = useTypedSelector((state) => state.auth.accessToken)
 
     const handleLogin = () => {
-        dispatch(login())
+        login()
     }
 
     useEffect(() => {
         if (accessToken) {
             navigate('/')
         }
-    }, [accessToken,navigate])
+    }, [accessToken, navigate])
 
     return (
         <div className='login'>
