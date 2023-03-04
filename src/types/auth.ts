@@ -1,6 +1,6 @@
 export type Profile = {
-    name: string
-    photoURL: string
+    name?: string
+    photoURL?: string
 }
 
 export enum AuthActionTypes {

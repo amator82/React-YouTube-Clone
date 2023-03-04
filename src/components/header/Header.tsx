@@ -1,21 +1,27 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+
+import { Profile } from '../../types/auth'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
 
 import { FaBars } from 'react-icons/fa'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdNotifications, MdApps } from 'react-icons/md'
-import { useSelector } from 'react-redux'
 
 import './_header.scss'
 
-const Header = ({ handleOpenSidebar }) => {
+type HeaderProps = {
+    handleOpenSidebar: () => void
+}
+
+const Header: FC<HeaderProps> = ({ handleOpenSidebar }) => {
     const navigate = useNavigate()
 
-    const [input, setInput] = useState('')
+    const [input, setInput] = useState<string>('')
 
-    const user = useSelector((state) => state.auth?.user)
+    const { user }: { user: Profile } = useTypedSelector((state) => state.auth)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         navigate(`/search/${input}`)
