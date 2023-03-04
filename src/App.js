@@ -12,7 +12,7 @@ import SubscriptionsPage from './pages/subsctiptionsPage/SubscriptionsPage'
 import ChannelPage from './pages/channelPage/ChannelPage'
 
 import MainLayout from './layouts/MainLayout'
-import HomeLayout from './layouts/HomeLayout'
+import HomeLayout from './layouts/HomeLayout.tsx'
 
 import './scss/_app.scss'
 

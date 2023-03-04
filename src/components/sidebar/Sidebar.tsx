@@ -1,9 +1,5 @@
-import React from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { Link } from 'react-router-dom'
-
-import { useDispatch } from 'react-redux'
-
-import { log_out } from '../../redux/actions/auth.action'
 
 import {
     MdSubscriptions,
@@ -16,12 +12,18 @@ import {
 } from 'react-icons/md'
 
 import './_sidebar.scss'
+import { useAction } from './../../hooks/useAction'
 
-const Sidebar = ({ openSidebar, handleOpenSidebar }) => {
-    const dispatch = useDispatch()
+type SidedbarProps = {
+    openSidebar: boolean
+    handleOpenSidebar: (value: boolean) => void
+}
+
+const Sidebar: FC<SidedbarProps> = ({ openSidebar, handleOpenSidebar }) => {
+    const { log_out } = useAction()
 
     const logOutHandler = () => {
-        dispatch(log_out())
+        log_out()
     }
 
     return (
