@@ -1,37 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-import { useSelector, useDispatch } from 'react-redux'
-
 import VideoMetaData from '../../components/videoMetaData/VideoMetaData'
-import VideoHorizonatal from './../../components/videoHorizontal/VideoHorizonatal'
+import VideoHorizonatal from '../../components/videoHorizontal/VideoHorizonatal'
 import Comments from '../../components/comments/Comments'
-import VideoHorizontalSceleton from './../../components/videoHorizontal/VideoHorizontalSceleton'
+import VideoHorizontalSceleton from '../../components/videoHorizontal/VideoHorizontalSceleton'
 
 import { Helmet } from 'react-helmet'
 
-import {
-    getRelatedVideos,
-    getVideoById
-} from './../../redux/actions/videos.action'
-
 import { Row, Col } from 'react-bootstrap'
 import './watchScreen.scss'
+import { useAction } from './../../hooks/useAction'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
 
-const WatchScreen = () => {
-    const dispatch = useDispatch()
+const WatchScreen: FC = () => {
+    const { getVideoById, getRelatedVideos } = useAction()
     const { id } = useParams()
 
     useEffect(() => {
-        dispatch(getVideoById(id))
-        dispatch(getRelatedVideos(id))
-    }, [dispatch, id])
+        getVideoById(id)
+        getRelatedVideos(id)
+    }, [id])
 
-    const { videos, loading: relatedVideosLoading } = useSelector(
+    const { videos, loading: relatedVideosLoading } = useTypedSelector(
         (state) => state.relatedVideos
     )
 
-    const { video, loading } = useSelector((state) => state.selectedVideo)
+    const { video, loading } = useTypedSelector((state) => state.selectedVideo)
 
     return (
         <Row>
@@ -62,8 +57,8 @@ const WatchScreen = () => {
             <Col lg={4}>
                 {!loading
                     ? videos
-                          ?.filter((video) => video.snippet)
-                          ?.map((video) => (
+                          ?.filter((video: any) => video.snippet)
+                          ?.map((video: any) => (
                               <VideoHorizonatal
                                   video={video}
                                   key={video.id.videoId}

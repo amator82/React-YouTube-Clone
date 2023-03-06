@@ -45,7 +45,7 @@ export const selectedVideoReducer = (
 }
 
 export const relatedVideoReducer = (
-    state = { loading: true, video: [] },
+    state = { loading: true, videos: [] },
     action: any
 ) => {
     const { payload, type } = action
