@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Helmet } from 'react-helmet'
 
-const HelmetCustom = ({
+type HelmetCustomProps = {
+    title: string
+    description: string
+}
+
+const HelmetCustom: FC<HelmetCustomProps> = ({
     title = 'YouTube Clone',
     description = 'Project with react and redux'
 }) => {
