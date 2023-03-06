@@ -1,31 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-
-import { useDispatch, useSelector } from 'react-redux'
-
-import { getVideosBySearch } from './../../redux/actions/videos.action'
 
 import SearchPageSceleton from './SearchPageSceleton'
 import VideoHorizonatal from '../../components/videoHorizontal/VideoHorizonatal'
 
+import { useAction } from './../../hooks/useAction'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
+
 import { Container } from 'react-bootstrap'
 import './searchPage.scss'
 
-const SearchPage = () => {
+const SearchPage: FC = () => {
     const { query } = useParams()
 
-    const dispatch = useDispatch()
+    const { getVideosBySearch } = useAction()
 
-    const { videos, loading } = useSelector((state) => state.searchedVideos)
+    const { videos, loading } = useTypedSelector(
+        (state) => state.searchedVideos
+    )
 
     useEffect(() => {
-        dispatch(getVideosBySearch(query))
-    }, [query, dispatch])
+        getVideosBySearch(query)
+    }, [query])
 
     return (
         <Container>
             {!loading
-                ? videos?.map((video) => (
+                ? videos?.map((video: any) => (
                       <VideoHorizonatal
                           video={video}
                           key={video.id.videoId}

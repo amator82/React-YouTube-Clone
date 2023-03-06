@@ -14,7 +14,7 @@ import './_videoHorizontal.scss'
 type VideoHorizonatalProps = {
     video: any
     searchPage: any
-    subscriptionPage: any
+    subscriptionPage?: any
 }
 
 const VideoHorizonatal: FC<VideoHorizonatalProps> = ({

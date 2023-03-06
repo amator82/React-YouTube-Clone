@@ -74,7 +74,7 @@ export const relatedVideoReducer = (
 }
 
 export const searchedVideosReducer = (
-    state = { loading: true, video: [] },
+    state = { loading: true, videos: [] },
     action: any
 ) => {
     const { payload, type } = action
