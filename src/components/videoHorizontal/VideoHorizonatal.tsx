@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { Link } from 'react-router-dom'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-import request from './../../api.ts'
+import request from '../../api'
 
 import moment from 'moment'
 import numeral from 'numeral'
 
 import { AiFillEye } from 'react-icons/ai'
-
 import { Row, Col } from 'react-bootstrap'
-
 import './_videoHorizontal.scss'
 
-const VideoHorizonatal = ({ video, searchPage, subscriptionPage }) => {
+type VideoHorizonatalProps = {
+    video: any
+    searchPage: any
+    subscriptionPage: any
+}
+
+const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
+    video,
+    searchPage,
+    subscriptionPage
+}) => {
     const {
         id,
         snippet: {
@@ -27,9 +35,9 @@ const VideoHorizonatal = ({ video, searchPage, subscriptionPage }) => {
         }
     } = video
 
-    const [views, setViews] = useState(null)
-    const [duration, setDuration] = useState(null)
-    const [channelIcon, setChannelIcon] = useState(null)
+    const [views, setViews] = useState<number | null>(null)
+    const [duration, setDuration] = useState<number | null>(null)
+    const [channelIcon, setChannelIcon] = useState<any | null>(null)
 
     const isVideo = !(id.kind === 'youtube#channel' || subscriptionPage)
 
