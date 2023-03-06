@@ -13,7 +13,7 @@ import './_videoHorizontal.scss'
 
 type VideoHorizonatalProps = {
     video: any
-    searchPage: any
+    searchPage?: any
     subscriptionPage?: any
 }
 

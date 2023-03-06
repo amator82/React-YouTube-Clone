@@ -103,7 +103,7 @@ export const searchedVideosReducer = (
 }
 
 export const subscriptionsChannelReducer = (
-    state = { loading: true, video: [] },
+    state = { loading: true, videos: [] },
     action: any
 ) => {
     const { payload, type } = action

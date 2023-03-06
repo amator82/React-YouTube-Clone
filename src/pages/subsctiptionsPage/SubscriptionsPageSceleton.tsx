@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import ContentLoader from 'react-content-loader'
 
-const SubscriptionsPageSceleton = () => (
+const SubscriptionsPageSceleton: FC = () => (
     <ContentLoader
         speed={2}
         width={1226}

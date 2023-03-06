@@ -1,29 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-
-import { getSubscribedChannels } from './../../redux/actions/videos.action'
-
-import { Container } from 'react-bootstrap'
-import './subscriptionsPage.scss'
 import VideoHorizonatal from '../../components/videoHorizontal/VideoHorizonatal'
 import SubscriptionsPageSceleton from './SubscriptionsPageSceleton'
 
-const SubscriptionsPage = () => {
-    const dispatch = useDispatch()
+import { useTypedSelector } from './../../hooks/useTypedSelector'
+import { useAction } from './../../hooks/useAction'
 
-    const { loading, videos } = useSelector(
+import { Container } from 'react-bootstrap'
+import './subscriptionsPage.scss'
+
+const SubscriptionsPage: FC = () => {
+    const { getSubscribedChannels } = useAction()
+    const { loading, videos } = useTypedSelector(
         (state) => state.subscriptionsChannel
     )
 
     useEffect(() => {
-        dispatch(getSubscribedChannels())
-    }, [dispatch])
+        getSubscribedChannels()
+    }, [])
 
     return (
         <Container fluid>
             {!loading
-                ? videos?.map((video) => (
+                ? videos?.map((video: any) => (
                       <VideoHorizonatal
                           video={video}
                           key={video.id}
