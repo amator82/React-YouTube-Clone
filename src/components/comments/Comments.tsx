@@ -1,36 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { FC, useState, useEffect } from 'react'
 
-import SingleComment from './../singleComment/SingleComment'
+import SingleComment from '../singleComment/SingleComment'
+
+import { useAction } from './../../hooks/useAction'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
 
 import './_comments.scss'
-import {
-    getCommentsOfVideoId,
-    addComment
-} from './../../redux/actions/comments.action'
+import { Profile } from '../../types/auth'
 
-const Comments = ({ videoId, totalComments }) => {
-    const [text, setText] = useState('')
+type CommentsProps = {
+    videoId: any
+    totalComments: number
+}
 
-    const dispatch = useDispatch()
+const Comments: FC<CommentsProps> = ({ videoId, totalComments }) => {
+    const [text, setText] = useState<string>('')
 
-    const user = useSelector((state) => state.auth?.user)
+    const { getCommentsOfVideoId, addComment } = useAction()
+
+    const { user }: { user: Profile } = useTypedSelector((state) => state.auth)
 
     useEffect(() => {
-        dispatch(getCommentsOfVideoId(videoId))
-    }, [dispatch, videoId])
+        getCommentsOfVideoId(videoId)
+    }, [videoId])
 
-    const comments = useSelector((state) => state.commentsList.comments)
+    const { comments } = useTypedSelector((state) => state.commentsList)
 
     const _comments = comments?.map(
-        (comment) => comment.snippet.topLevelComment.snippet
+        (comment: any) => comment.snippet.topLevelComment.snippet
     )
 
-    const handleComment = (e) => {
+    const handleComment = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (text.length === 0) return
+        if (text.length === 0) {
+            return
+        }
 
-        dispatch(addComment(videoId, text))
+        addComment(videoId, text)
         setText('')
     }
 
@@ -57,7 +63,7 @@ const Comments = ({ videoId, totalComments }) => {
                 </form>
             </div>
             <div className='comments__list'>
-                {_comments?.map((comment, index) => (
+                {_comments?.map((comment: any, index: number) => (
                     <SingleComment comment={comment} key={index} />
                 ))}
             </div>
