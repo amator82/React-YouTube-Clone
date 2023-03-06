@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import moment from 'moment'
 
 import './_singleComment.scss'
 
-const SingleComment = ({ comment }) => {
+type SingleCommentProps = {
+    comment: {
+        authorDisplayName: string
+        authorProfileImageUrl: string
+        textDisplay: string
+        publishedAt: string
+    }
+}
+
+const SingleComment: FC<SingleCommentProps> = ({ comment }) => {
     const {
         authorDisplayName,
         authorProfileImageUrl,

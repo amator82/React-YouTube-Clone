@@ -13,6 +13,34 @@ type CommentsProps = {
     totalComments: number
 }
 
+interface topLevelCommentSnippet {
+    videoId: string
+    textDisplay: string
+    textOriginal: string
+    authorDisplayName: string
+    authorProfileImageUrl: string
+    authorChannelUrl: string
+    authorChannelId: {
+        value: string
+    }
+    canRate: boolean
+    viewerRating: string
+    likeCount: number
+    publishedAt: string
+    updatedAt: string
+}
+
+interface Comment {
+    id: string
+    snippet: {
+        videoId: string
+        topLevelComment: {
+            id: string
+            snippet: topLevelCommentSnippet
+        }
+    }
+}
+
 const Comments: FC<CommentsProps> = ({ videoId, totalComments }) => {
     const [text, setText] = useState<string>('')
 
@@ -24,13 +52,15 @@ const Comments: FC<CommentsProps> = ({ videoId, totalComments }) => {
         getCommentsOfVideoId(videoId)
     }, [videoId])
 
-    const { comments } = useTypedSelector((state) => state.commentsList)
-
-    const _comments = comments?.map(
-        (comment: any) => comment.snippet.topLevelComment.snippet
+    const { comments }: { comments: Comment[] } = useTypedSelector(
+        (state) => state.commentsList
     )
 
-    const handleComment = (e: React.FormEvent<HTMLFormElement>) => {
+    const _comments = comments?.map(
+        (comment) => comment.snippet.topLevelComment.snippet
+    )
+
+    const handleComment = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         if (text.length === 0) {
             return
@@ -63,7 +93,7 @@ const Comments: FC<CommentsProps> = ({ videoId, totalComments }) => {
                 </form>
             </div>
             <div className='comments__list'>
-                {_comments?.map((comment: any, index: number) => (
+                {_comments?.map((comment, index: number) => (
                     <SingleComment comment={comment} key={index} />
                 ))}
             </div>
