@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 import Home from './pages/home/Home'
 import Login from './pages/login/Login'
@@ -12,12 +11,14 @@ import SubscriptionsPage from './pages/subsctiptionsPage/SubscriptionsPage'
 import ChannelPage from './pages/channelPage/ChannelPage'
 
 import MainLayout from './layouts/MainLayout'
-import HomeLayout from './layouts/HomeLayout.tsx'
+import HomeLayout from './layouts/HomeLayout'
+
+import { useTypedSelector } from './hooks/useTypedSelector'
 
 import './scss/_app.scss'
 
-const App = () => {
-    const { accessToken, loading } = useSelector((state) => state.auth)
+const App: FC = () => {
+    const { accessToken, loading } = useTypedSelector((state) => state.auth)
 
     const navigate = useNavigate()
 
@@ -25,7 +26,7 @@ const App = () => {
         if (!loading && !accessToken) {
             navigate('/auth')
         }
-    }, [accessToken, loading, navigate])
+    }, [accessToken, loading])
 
     return (
         <Routes>
