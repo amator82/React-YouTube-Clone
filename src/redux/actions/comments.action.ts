@@ -36,7 +36,7 @@ export const getCommentsOfVideoId =
     }
 
 export const addComment =
-    (id: string, text: string) =>
+    (id: string | undefined, text: string) =>
     async (dispatch: Dispatch<CreateCommentAction>, getState: any) => {
         try {
             const obj = {

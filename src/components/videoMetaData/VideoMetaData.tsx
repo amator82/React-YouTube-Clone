@@ -1,39 +1,43 @@
-import React, { useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
 import ShowMoreText from 'react-show-more-text'
 
-import { useDispatch, useSelector } from 'react-redux'
-
-import { MdThumbUp } from 'react-icons/md'
-
 import HelmetCustom from '../HelmetCustom'
-
-import {
-    checkSubscriptoinStatus,
-    getChannelDetails
-} from './../../redux/actions/channel.action'
 
 import numeral from 'numeral'
 import moment from 'moment'
 
-import './_videoMetaData.scss'
+import { useAction } from './../../hooks/useAction'
+import { useTypedSelector } from './../../hooks/useTypedSelector'
 
-const VideoMetaData = ({ video: { snippet, statistics }, videoId }) => {
-    const dispatch = useDispatch()
+import { MdThumbUp } from 'react-icons/md'
+import './_videoMetaData.scss'
+import { VideoSnippet } from './../../pages/channelPage/ChannelPage'
+
+type VideoMetaDataProps = {
+    video: { snippet: VideoSnippet; statistics: any }
+    videoId: string | undefined
+}
+
+const VideoMetaData: FC<VideoMetaDataProps> = ({
+    video: { snippet, statistics },
+    videoId
+}) => {
+    const { getChannelDetails, checkSubscriptoinStatus } = useAction()
 
     const { channelId, channelTitle, description, title, publishedAt } = snippet
     const { viewCount, likeCount } = statistics
 
     const { snippet: channelSnippet, statistics: channelStatistics } =
-        useSelector((state) => state.channelDetails.channel)
+        useTypedSelector((state) => state.channelDetails.channel)
 
-    const subscriptionStatus = useSelector(
-        (state) => state.channelDetails.subscriptionStatus
+    const { subscriptionStatus } = useTypedSelector(
+        (state) => state.channelDetails
     )
 
     useEffect(() => {
-        dispatch(getChannelDetails(channelId))
-        dispatch(checkSubscriptoinStatus(channelId))
-    }, [dispatch, channelId])
+        getChannelDetails(channelId)
+        checkSubscriptoinStatus(channelId)
+    }, [channelId])
 
     return (
         <div className='videoMetaData py-2'>

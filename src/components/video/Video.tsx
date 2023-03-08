@@ -11,9 +11,10 @@ import numeral from 'numeral'
 import { AiFillEye } from 'react-icons/ai'
 
 import './_video.scss'
+import { IVideo } from './../../pages/channelPage/ChannelPage'
 
 type VideoProps = {
-    video: any
+    video: IVideo
     channelPage?: any
 }
 

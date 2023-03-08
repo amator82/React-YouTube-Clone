@@ -8,14 +8,15 @@ import VideoHorizontalSceleton from '../../components/videoHorizontal/VideoHoriz
 
 import { Helmet } from 'react-helmet'
 
-import { Row, Col } from 'react-bootstrap'
-import './watchScreen.scss'
 import { useAction } from './../../hooks/useAction'
 import { useTypedSelector } from './../../hooks/useTypedSelector'
 
+import { Row, Col } from 'react-bootstrap'
+import './watchScreen.scss'
+
 const WatchScreen: FC = () => {
     const { getVideoById, getRelatedVideos } = useAction()
-    const { id } = useParams()
+    const { id } = useParams<{ id?: string }>()
 
     useEffect(() => {
         getVideoById(id)

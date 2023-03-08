@@ -9,7 +9,7 @@ import './_comments.scss'
 import { Profile } from '../../types/auth'
 
 type CommentsProps = {
-    videoId: any
+    videoId: string | undefined
     totalComments: number
 }
 
