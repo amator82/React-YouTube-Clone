@@ -1,6 +1,10 @@
-import { ChannelAction, ChannelState, ChannelTypes } from '../../types/channel'
+import {
+    ChannelDetailsAction,
+    ChannelDetailsState,
+    ChannelTypes
+} from '../../types/channelDetails'
 
-const initialState: ChannelState = {
+const initialState: ChannelDetailsState = {
     loading: true,
     channel: {},
     subscriptionStatus: false
@@ -8,7 +12,7 @@ const initialState: ChannelState = {
 
 export const channelDetailsReducer = (
     state = initialState,
-    action: ChannelAction
+    action: ChannelDetailsAction
 ) => {
     switch (action.type) {
         case ChannelTypes.CHANNEL_DETAILS_REQUEST:

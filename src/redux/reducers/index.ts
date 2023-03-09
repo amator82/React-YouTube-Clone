@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux'
 import { authReducer } from './auth.reducer'
-import { channelDetailsReducer } from './channel.reducer'
+import { channelDetailsReducer } from './channelDetails.reducer'
 import {
     selectedVideoReducer,
     relatedVideoReducer,
     searchedVideosReducer,
-    subscriptionsChannelReducer,
-    channelVideosReducer
+    subscriptionsChannelReducer
 } from './videos.reducer'
 import { commentsListReducer } from './comments.reducer'
 import { getPopularVideosReducer } from './popularVideos.reducer'
+import { channelVideosReducer } from './channelVideos.reducer'
 
 export const rootReducer = combineReducers({
     auth: authReducer,

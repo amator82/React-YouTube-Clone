@@ -5,13 +5,13 @@ export enum ChannelTypes {
     SET_SUBSCRIPTION_STATUS = 'SET_SUBSCRIPTION_STATUS'
 }
 
-export type Channel = {
+export type ChannelDetails = {
     kind: string
     etag: string
     id: string
 }
 
-export interface ChannelState {
+export interface ChannelDetailsState {
     loading: boolean
     channel: any
     subscriptionStatus: boolean
@@ -23,7 +23,7 @@ interface FetchChannelDetailsRequestAction {
 
 interface FetchChannelDetailsSuccessAction {
     type: ChannelTypes.CHANNEL_DETAILS_SUCCESS
-    payload: Channel[]
+    payload: ChannelDetails[]
 }
 
 interface FetchChannelDetailsErrorAction {
@@ -36,7 +36,7 @@ interface FetchSetSubscriptionStatus {
     payload: boolean
 }
 
-export type ChannelAction =
+export type ChannelDetailsAction =
     | FetchChannelDetailsRequestAction
     | FetchChannelDetailsSuccessAction
     | FetchChannelDetailsErrorAction

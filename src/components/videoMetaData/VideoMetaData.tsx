@@ -9,12 +9,13 @@ import moment from 'moment'
 import { useAction } from './../../hooks/useAction'
 import { useTypedSelector } from './../../hooks/useTypedSelector'
 
+import { IVideoSnippet } from '../../types/video'
+
 import { MdThumbUp } from 'react-icons/md'
 import './_videoMetaData.scss'
-import { VideoSnippet } from './../../pages/channelPage/ChannelPage'
 
 type VideoMetaDataProps = {
-    video: { snippet: VideoSnippet; statistics: any }
+    video: { snippet: IVideoSnippet; statistics: any }
     videoId: string | undefined
 }
 

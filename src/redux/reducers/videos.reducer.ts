@@ -1,4 +1,3 @@
-import { ChannelVideosTypes } from '../../types/chanelVideos'
 import {
     SELECTED_VIDEO_REQUEST,
     SELECTED_VIDEO_SUCCESS,
@@ -121,35 +120,6 @@ export const subscriptionsChannelReducer = (
                 loading: false
             }
         case SUBSCRIPTIONS_CHANNEL_FAIL:
-            return {
-                ...state,
-                loading: false,
-                error: payload
-            }
-        default:
-            return state
-    }
-}
-
-export const channelVideosReducer = (
-    state = { loading: true, videos: [] },
-    action: any
-) => {
-    const { payload, type } = action
-
-    switch (type) {
-        case ChannelVideosTypes.CHANNEL_VIDEOS_REQUEST:
-            return {
-                ...state,
-                loading: true
-            }
-        case ChannelVideosTypes.CHANNEL_VIDEOS_SUCCESS:
-            return {
-                ...state,
-                videos: payload,
-                loading: false
-            }
-        case ChannelVideosTypes.CHANNEL_VIDEOS_FAIL:
             return {
                 ...state,
                 loading: false,

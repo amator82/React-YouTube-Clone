@@ -1,9 +1,10 @@
 import { Dispatch } from 'redux'
 import request from '../../api'
-import { ChannelAction, ChannelTypes } from '../../types/channel'
+import { ChannelDetailsAction, ChannelTypes } from '../../types/channelDetails'
 
 export const getChannelDetails =
-    (id: string | undefined) => async (dispatch: Dispatch<ChannelAction>) => {
+    (id: string | undefined) =>
+    async (dispatch: Dispatch<ChannelDetailsAction>) => {
         try {
             dispatch({
                 type: ChannelTypes.CHANNEL_DETAILS_REQUEST
@@ -32,7 +33,7 @@ export const getChannelDetails =
 
 export const checkSubscriptoinStatus =
     (id: string) =>
-    async (dispatch: Dispatch<ChannelAction>, getState: any) => {
+    async (dispatch: Dispatch<ChannelDetailsAction>, getState: any) => {
         try {
             const { data } = await request('/subscriptions', {
                 params: {

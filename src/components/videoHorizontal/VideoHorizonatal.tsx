@@ -10,9 +10,10 @@ import numeral from 'numeral'
 import { AiFillEye } from 'react-icons/ai'
 import { Row, Col } from 'react-bootstrap'
 import './_videoHorizontal.scss'
+import { IVideo } from './../../types/video'
 
 type VideoHorizonatalProps = {
-    video: any
+    video: IVideo
     searchPage?: any
     subscriptionPage?: any
 }
@@ -41,8 +42,8 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
 
     const isVideo = !(id.kind === 'youtube#channel' || subscriptionPage)
 
-    const _channelId = resourceId?.channelId || channelId
-
+    const _channelId = id?.videoId || channelId
+    // resourceId?.channelId ||
     useEffect(() => {
         const getVideoDetails = async () => {
             const {
@@ -130,11 +131,11 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
                         )}
                         <span>{channelTitle}</span>
                     </div>
-                    {subscriptionPage && (
+                    {/* {subscriptionPage && (
                         <p className='mt-2'>
                             {video.contentDetails.totalItemCount} Videos
                         </p>
-                    )}
+                    )} */}
                 </Col>
             </Row>
         </Link>

@@ -9,6 +9,7 @@ import { useAction } from './../../hooks/useAction'
 import { useTypedSelector } from './../../hooks/useTypedSelector'
 
 import './_home.scss'
+import { IVideo } from './../../types/video';
 
 const Home: FC = () => {
     const { getPopularVideos, getVideosByCategory } = useAction()
@@ -43,7 +44,7 @@ const Home: FC = () => {
                 }
             >
                 <div className='home__videos'>
-                    {videos.map((video) => {
+                    {videos.map((video: IVideo) => {
                         return <Video key={video?.id?.videoId} video={video} />
                     })}
                 </div>

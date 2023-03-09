@@ -9,54 +9,10 @@ import Video from '../../components/video/Video'
 import { useAction } from './../../hooks/useAction'
 import { useTypedSelector } from './../../hooks/useTypedSelector'
 
+import { IChannelVideos } from '../../types/chanelVideos'
+
 import { Col, Container, Row } from 'react-bootstrap'
 import './channelPage.scss'
-
-type UWH = {
-    url: string
-    width: number
-    height: number
-}
-
-type VideoSnippetResourceId = {
-    kind: string
-    videoId: string
-}
-
-type VideoSnippetThumbnails = {
-    default: UWH
-    medium: UWH
-    high: UWH
-    standart: UWH
-    maxres: UWH
-}
-
-export interface VideoSnippet {
-    publishedAt: string
-    channelId: string
-    title: string
-    description: string
-    thumbnails: VideoSnippetThumbnails
-    channelTitle: string
-    playlistId: string
-    position: number
-    resourceId: VideoSnippetResourceId
-    videoOwnerChannelTitle: string
-    videoOwnerChannelId: string
-}
-
-type VideoContentDetails = {
-    videoId: string
-    videoPublishedAt: string
-}
-
-export interface IVideo {
-    kind: string
-    etag: string
-    id: any
-    snippet: VideoSnippet
-    contentDetails: VideoContentDetails
-}
 
 const ChannelPage: FC = () => {
     const { getChannelDetails, getVideosByChannelId } = useAction()
@@ -68,7 +24,7 @@ const ChannelPage: FC = () => {
         getChannelDetails(channelId)
     }, [channelId])
 
-    const { videos, loading }: { videos: IVideo[]; loading: boolean } =
+    const { videos, loading }: { videos: IChannelVideos[]; loading: boolean } =
         useTypedSelector((state) => state.channelVideos)
     const { snippet, statistics } = useTypedSelector(
         (state) => state.channelDetails.channel
@@ -91,8 +47,8 @@ const ChannelPage: FC = () => {
             <Container>
                 <Row className='mt-2'>
                     {!loading
-                        ? videos?.map((video: any) => (
-                              <Col md={4} lg={3} key={video.id}>
+                        ? videos?.map((video: IChannelVideos) => (
+                              <Col md={4} lg={3} key={video.id.videoId}>
                                   <Video video={video} channelPage />
                               </Col>
                           ))
