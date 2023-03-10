@@ -13,13 +13,13 @@ import { PopularVideos } from '../../types/popularVideos'
 import './_home.scss'
 
 const Home: FC = () => {
-    const { getPopularVideos, getVideosByCategory } = useAction()
+    const { getPopularVideos, getPopularVideosByCategory } = useAction()
     const isLoading = useRef(true)
 
     useEffect(() => {
         getPopularVideos()
         isLoading.current = false
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const { videos, activeCategory } = useTypedSelector(
@@ -30,7 +30,7 @@ const Home: FC = () => {
         if (activeCategory === 'All') {
             getPopularVideos()
         } else {
-            getVideosByCategory(activeCategory)
+            getPopularVideosByCategory(activeCategory)
         }
     }
 

@@ -25,7 +25,7 @@ const keywords: string[] = [
 ]
 
 const CategoriesBar: FC = memo(() => {
-    const { getPopularVideos, getVideosByCategory } = useAction()
+    const { getPopularVideos, getPopularVideosByCategory } = useAction()
 
     const [activeElement, setActiveElement] = useState<string>('All')
 
@@ -35,7 +35,7 @@ const CategoriesBar: FC = memo(() => {
         if (category === 'All') {
             getPopularVideos()
         } else {
-            getVideosByCategory(category)
+            getPopularVideosByCategory(category)
         }
     }
 

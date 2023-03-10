@@ -1,6 +1,6 @@
 import * as AuthActionCreators from './auth.action'
 import * as ChannelDetailsActionCreators from './channelDetails.action'
-import * as VideoActionCreators from './videos.action'
+import * as CategoryVideoActionCreators from './categoryVideos.action'
 import * as CommentsActionCreators from './comments.action'
 import * as PopularVideosActionCreators from './popularVideos.action'
 import * as ChannelVideosActionCreators from './channelVideos.action'
@@ -13,7 +13,7 @@ import * as SubscribedChannelActionCreators from './subscribedChannel.action'
 export default {
     ...AuthActionCreators,
     ...ChannelDetailsActionCreators,
-    ...VideoActionCreators,
+    ...CategoryVideoActionCreators,
     ...CommentsActionCreators,
     ...PopularVideosActionCreators,
     ...ChannelVideosActionCreators,
