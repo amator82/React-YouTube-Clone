@@ -13,14 +13,14 @@ import './searchPage.scss'
 const SearchPage: FC = () => {
     const { query } = useParams()
 
-    const { getVideosBySearch } = useAction()
+    const { getSearchedVideos } = useAction()
 
     const { videos, loading } = useTypedSelector(
         (state) => state.searchedVideos
     )
 
     useEffect(() => {
-        getVideosBySearch(query)
+        getSearchedVideos(query)
     }, [query])
 
     return (
