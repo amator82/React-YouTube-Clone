@@ -2,7 +2,7 @@ import {
     SelectedVideoAction,
     SelectedVideoActionTypes
 } from '../../types/selectedVideo'
-import request from './../../api'
+import request from '../../api'
 import { Dispatch } from 'redux'
 
 export const getVideoById =
