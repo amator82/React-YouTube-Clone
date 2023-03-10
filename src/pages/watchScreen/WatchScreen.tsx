@@ -13,6 +13,7 @@ import { useTypedSelector } from './../../hooks/useTypedSelector'
 
 import { Row, Col } from 'react-bootstrap'
 import './watchScreen.scss'
+import { RelatedVideos } from '../../types/relatedVideos'
 
 const WatchScreen: FC = () => {
     const { getVideoById, getRelatedVideos } = useAction()
@@ -23,9 +24,7 @@ const WatchScreen: FC = () => {
         getRelatedVideos(id)
     }, [id])
 
-    const { videos, loading: relatedVideosLoading } = useTypedSelector(
-        (state) => state.relatedVideos
-    )
+    const { videos }= useTypedSelector((state) => state.relatedVideos.videos)
 
     const { video, loading } = useTypedSelector((state) => state.selectedVideo)
 
@@ -46,7 +45,7 @@ const WatchScreen: FC = () => {
                     ></iframe>
                 </div>
                 {!loading ? (
-                    <VideoMetaData video={video} videoId={id} />
+                    <VideoMetaData video={video} />
                 ) : (
                     <h6>Loading...</h6>
                 )}
@@ -59,7 +58,7 @@ const WatchScreen: FC = () => {
                 {!loading
                     ? videos
                           ?.filter((video: any) => video.snippet)
-                          ?.map((video: any) => (
+                          ?.map((video: RelatedVideos) => (
                               <VideoHorizonatal
                                   video={video}
                                   key={video.id.videoId}

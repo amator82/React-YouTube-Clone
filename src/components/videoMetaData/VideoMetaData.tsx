@@ -9,24 +9,24 @@ import moment from 'moment'
 import { useAction } from './../../hooks/useAction'
 import { useTypedSelector } from './../../hooks/useTypedSelector'
 
-import { IVideoSnippet } from '../../types/video'
-
 import { MdThumbUp } from 'react-icons/md'
 import './_videoMetaData.scss'
+import {
+    SelectedVideo,
+    SelectedVideoSnippet,
+    SelectedVideoStatistics
+} from '../../types/selectedVideo'
 
 type VideoMetaDataProps = {
-    video: { snippet: IVideoSnippet; statistics: any }
-    videoId: string | undefined
+    video: SelectedVideo 
 }
 
-const VideoMetaData: FC<VideoMetaDataProps> = ({
-    video: { snippet, statistics },
-    videoId
-}) => {
+const VideoMetaData: FC<VideoMetaDataProps> = ({ video }) => {
     const { getChannelDetails, checkSubscriptoinStatus } = useAction()
 
-    const { channelId, channelTitle, description, title, publishedAt } = snippet
-    const { viewCount, likeCount } = statistics
+    const { channelId, channelTitle, description, title, publishedAt } =
+        video?.snippet
+    const { viewCount, likeCount } = video?.statistics
 
     const { snippet: channelSnippet, statistics: channelStatistics } =
         useTypedSelector((state) => state.channelDetails.channel)

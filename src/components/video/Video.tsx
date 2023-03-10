@@ -8,14 +8,13 @@ import request from '../../api'
 import moment from 'moment'
 import numeral from 'numeral'
 
-import { IVideo, TVideo } from './../../types/video'
+import { TVideo, IVideo } from './../../types/video'
 
 import { AiFillEye } from 'react-icons/ai'
 import './_video.scss'
-import { IChannelVideos } from '../../types/chanelVideos'
 
 type VideoProps = {
-    video: TVideo
+    video: TVideo 
     channelPage?: boolean
 }
 

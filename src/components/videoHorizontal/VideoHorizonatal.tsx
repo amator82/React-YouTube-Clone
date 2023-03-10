@@ -7,13 +7,15 @@ import request from '../../api'
 import moment from 'moment'
 import numeral from 'numeral'
 
+import { TVideo } from './../../types/video'
+
 import { AiFillEye } from 'react-icons/ai'
 import { Row, Col } from 'react-bootstrap'
 import './_videoHorizontal.scss'
-import { IVideo } from './../../types/video'
+import { RelatedVideos } from '../../types/relatedVideos'
 
 type VideoHorizonatalProps = {
-    video: IVideo
+    video: RelatedVideos
     searchPage?: any
     subscriptionPage?: any
 }
@@ -31,8 +33,7 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
             description,
             title,
             publishedAt,
-            thumbnails: { medium },
-            resourceId
+            thumbnails: { medium }
         }
     } = video
 

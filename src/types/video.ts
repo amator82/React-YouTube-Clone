@@ -1,4 +1,6 @@
-import { IChannelVideos } from "./chanelVideos"
+import { IChannelVideos } from './chanelVideos'
+import { PopularVideos } from './popularVideos'
+import { RelatedVideos } from './relatedVideos'
 
 export type UWH = {
     url: string
@@ -41,9 +43,9 @@ export type VideoContentDetails = {
 export interface IVideo {
     kind: string
     etag: string
-    id: VideoSnippetResourceId 
+    id: VideoSnippetResourceId
     snippet: IVideoSnippet
-    contentDetails: VideoContentDetails
+    contentDetails?: VideoContentDetails
 }
 
-export type TVideo = IVideo | IChannelVideos
+export type TVideo = IVideo | IChannelVideos | PopularVideos | RelatedVideos

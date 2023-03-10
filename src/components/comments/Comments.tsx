@@ -10,7 +10,7 @@ import { Profile } from '../../types/auth'
 
 type CommentsProps = {
     videoId: string | undefined
-    totalComments: number
+    totalComments: string | undefined
 }
 
 interface topLevelCommentSnippet {

@@ -46,7 +46,7 @@ export const getVideosByChannelId =
             )
             dispatch({
                 type: ChannelVideosTypes.CHANNEL_VIDEOS_FAIL,
-                payload: error.response.data
+                payload: error.response.data.message
             })
         }
     }

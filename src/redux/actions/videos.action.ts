@@ -2,12 +2,6 @@ import {
     HOME_VIDEOS_FAIL,
     HOME_VIDEOS_REQUEST,
     HOME_VIDEOS_SUCCESS,
-    SELECTED_VIDEO_REQUEST,
-    SELECTED_VIDEO_SUCCESS,
-    SELECTED_VIDEO_FAIL,
-    RELATED_VIDEOS_REQUEST,
-    RELATED_VIDEOS_SUCCESS,
-    RELATED_VIDEOS_FAIL,
     SEARCH_VIDEOS_REQUEST,
     SEARCH_VIDEOS_SUCCESS,
     SEARCH_VIDEOS_FAIL,
@@ -50,62 +44,6 @@ export const getVideosByCategory =
             })
         }
     }
-
-export const getVideoById = (id: any) => async (dispatch: any) => {
-    try {
-        dispatch({
-            type: SELECTED_VIDEO_REQUEST
-        })
-
-        const { data } = await request('/videos', {
-            params: {
-                part: 'snippet,statistics',
-                id
-            }
-        })
-
-        dispatch({
-            type: SELECTED_VIDEO_SUCCESS,
-            payload: data.items[0]
-        })
-    } catch (error) {
-        console.log(error.message, 'Selected video error')
-
-        dispatch({
-            type: SELECTED_VIDEO_FAIL,
-            payload: error.message
-        })
-    }
-}
-
-export const getRelatedVideos = (id: any) => async (dispatch: any) => {
-    try {
-        dispatch({
-            type: RELATED_VIDEOS_REQUEST
-        })
-
-        const { data } = await request('/search', {
-            params: {
-                part: 'snippet',
-                relatedVideoId: id,
-                maxResults: 15,
-                type: 'video'
-            }
-        })
-
-        dispatch({
-            type: RELATED_VIDEOS_SUCCESS,
-            payload: data.items
-        })
-    } catch (error) {
-        console.log(error.response.data.message, 'Get related video error')
-
-        dispatch({
-            type: RELATED_VIDEOS_FAIL,
-            payload: error.response.data.message
-        })
-    }
-}
 
 export const getVideosBySearch = (keyword: any) => async (dispatch: any) => {
     try {

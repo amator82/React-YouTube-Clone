@@ -10,6 +10,8 @@ import { useAction } from './../../hooks/useAction'
 import { useTypedSelector } from './../../hooks/useTypedSelector'
 
 import { IChannelVideos } from '../../types/chanelVideos'
+import { ChannelDetailsSnippet } from '../../types/channelDetails'
+import { ChannelDetailsStatistics } from './../../types/channelDetails'
 
 import { Col, Container, Row } from 'react-bootstrap'
 import './channelPage.scss'
@@ -26,9 +28,13 @@ const ChannelPage: FC = () => {
 
     const { videos, loading }: { videos: IChannelVideos[]; loading: boolean } =
         useTypedSelector((state) => state.channelVideos)
-    const { snippet, statistics } = useTypedSelector(
-        (state) => state.channelDetails.channel
-    )
+    const {
+        snippet,
+        statistics
+    }: {
+        snippet: ChannelDetailsSnippet
+        statistics: ChannelDetailsStatistics
+    } = useTypedSelector((state) => state.channelDetails.channel)
 
     return (
         <>
