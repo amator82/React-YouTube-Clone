@@ -7,6 +7,7 @@ import * as ChannelVideosActionCreators from './channelVideos.action'
 import * as RelatedVideosActionCreators from './relatedVideos.action'
 import * as SelectedVideoActionCreators from './selectedVideo.action'
 import * as SearchedVideosActionCreators from './searchedVideos.action'
+import * as SubscribedChannelActionCreators from './subscribedChannel.action'
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -18,5 +19,6 @@ export default {
     ...ChannelVideosActionCreators,
     ...RelatedVideosActionCreators,
     ...SelectedVideoActionCreators,
-    ...SearchedVideosActionCreators
+    ...SearchedVideosActionCreators,
+    ...SubscribedChannelActionCreators
 }

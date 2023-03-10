@@ -12,7 +12,7 @@ import './subscriptionsPage.scss'
 const SubscriptionsPage: FC = () => {
     const { getSubscribedChannels } = useAction()
     const { loading, videos } = useTypedSelector(
-        (state) => state.subscriptionsChannel
+        (state) => state.subscribedChannel
     )
 
     useEffect(() => {

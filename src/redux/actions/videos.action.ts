@@ -1,10 +1,7 @@
 import {
     HOME_VIDEOS_FAIL,
     HOME_VIDEOS_REQUEST,
-    HOME_VIDEOS_SUCCESS,
-    SUBSCRIPTIONS_CHANNEL_REQUEST,
-    SUBSCRIPTIONS_CHANNEL_SUCCESS,
-    SUBSCRIPTIONS_CHANNEL_FAIL
+    HOME_VIDEOS_SUCCESS
 } from '../actionType'
 import request from '../../api'
 
@@ -38,39 +35,6 @@ export const getVideosByCategory =
             dispatch({
                 type: HOME_VIDEOS_FAIL,
                 payload: error.message
-            })
-        }
-    }
-
-export const getSubscribedChannels =
-    () => async (dispatch: any, getState: any) => {
-        dispatch({
-            type: SUBSCRIPTIONS_CHANNEL_REQUEST
-        })
-
-        try {
-            const { data } = await request('/subscriptions', {
-                params: {
-                    part: 'snippet,contentDetails',
-                    mine: true
-                },
-                headers: {
-                    Authorization: `Bearer ${getState().auth.accessToken}`
-                }
-            })
-
-            dispatch({
-                type: SUBSCRIPTIONS_CHANNEL_SUCCESS,
-                payload: data.items
-            })
-        } catch (error) {
-            console.log(
-                error.response.data,
-                'Get subscription channel request error'
-            )
-            dispatch({
-                type: SUBSCRIPTIONS_CHANNEL_FAIL,
-                payload: error.response.data
             })
         }
     }
