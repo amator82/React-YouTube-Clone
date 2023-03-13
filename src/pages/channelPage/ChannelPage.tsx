@@ -9,7 +9,6 @@ import Video from '../../components/video/Video'
 import { useAction } from './../../hooks/useAction'
 import { useTypedSelector } from './../../hooks/useTypedSelector'
 
-import { IChannelVideos } from '../../types/chanelVideos'
 import { ChannelDetailsSnippet } from '../../types/channelDetails'
 import { ChannelDetailsStatistics } from './../../types/channelDetails'
 
@@ -26,8 +25,7 @@ const ChannelPage: FC = () => {
         getChannelDetails(channelId)
     }, [channelId])
 
-    const { videos, loading }: { videos: IChannelVideos[]; loading: boolean } =
-        useTypedSelector((state) => state.channelVideos)
+    const { videos, loading } = useTypedSelector((state) => state.channelVideos)
     const {
         snippet,
         statistics
@@ -53,11 +51,33 @@ const ChannelPage: FC = () => {
             <Container>
                 <Row className='mt-2'>
                     {!loading
-                        ? videos?.map((video: IChannelVideos) => (
-                              <Col md={4} lg={3} key={video.id.videoId}>
-                                  <Video video={video} channelPage />
-                              </Col>
-                          ))
+                        ? videos?.map((video) => {
+                              const {
+                                  id,
+                                  snippet: {
+                                      channelId,
+                                      channelTitle,
+                                      title,
+                                      publishedAt,
+                                      thumbnails: { medium }
+                                  },
+                                  contentDetails: { videoId }
+                              } = video
+
+                              return (
+                                  <Col md={4} lg={3} key={id}>
+                                      <Video
+                                          id={videoId}
+                                          channelId={channelId}
+                                          channelTitle={channelTitle}
+                                          title={title}
+                                          publishedAt={publishedAt}
+                                          imageURL={medium.url}
+                                          channelPage
+                                      />
+                                  </Col>
+                              )
+                          })
                         : [...new Array(15)].map((_, index) => (
                               <Col md={4} lg={3} key={index}>
                                   <ChannelPageSceleton />

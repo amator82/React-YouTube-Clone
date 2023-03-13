@@ -8,30 +8,29 @@ import request from '../../api'
 import moment from 'moment'
 import numeral from 'numeral'
 
-import { TVideo, IVideo } from './../../types/video'
-
 import { AiFillEye } from 'react-icons/ai'
 import './_video.scss'
 
 type VideoProps = {
-    video: TVideo 
+    id: string
+    channelId: string
+    channelTitle: string
+    title: string
+    publishedAt: string
+    imageURL: string
     channelPage?: boolean
 }
 
-const Video: FC<VideoProps> = ({ video, channelPage }) => {
+const Video: FC<VideoProps> = ({
+    id,
+    channelId,
+    channelTitle,
+    title,
+    imageURL,
+    publishedAt,
+    channelPage
+}) => {
     const navigate = useNavigate()
-
-    const {
-        id,
-        snippet: {
-            channelId,
-            channelTitle,
-            title,
-            publishedAt,
-            thumbnails: { medium }
-        },
-        contentDetails
-    } = video
 
     const [views, setViews] = useState(null)
     const [duration, setDuration] = useState(null)
@@ -40,8 +39,6 @@ const Video: FC<VideoProps> = ({ video, channelPage }) => {
     const seconds = moment.duration(duration).asSeconds()
     const _duration = moment.utc(seconds * 1000).format('mm:ss')
 
-    const _videoId = id?.videoId || contentDetails?.videoId || id
-
     useEffect(() => {
         const getVideoDetails = async () => {
             const {
@@ -49,14 +46,14 @@ const Video: FC<VideoProps> = ({ video, channelPage }) => {
             } = await request('/videos', {
                 params: {
                     part: 'contentDetails,statistics',
-                    id: _videoId
+                    id
                 }
             })
             setDuration(items[0].contentDetails.duration)
             setViews(items[0].statistics.viewCount)
         }
         getVideoDetails()
-    }, [_videoId])
+    }, [id])
 
     useEffect(() => {
         const get_channel_icon = async () => {
@@ -74,13 +71,13 @@ const Video: FC<VideoProps> = ({ video, channelPage }) => {
     }, [channelId])
 
     const handleVideoClick = (): void => {
-        navigate(`/watch/${_videoId}`)
+        navigate(`/watch/${id}`)
     }
 
     return (
         <div className='video' onClick={handleVideoClick}>
             <div className='video__top'>
-                <LazyLoadImage src={medium.url} effect='blur' />
+                <LazyLoadImage src={imageURL} effect='blur' />
                 <span className='video__duration'>{_duration}</span>
             </div>
             <div className='video__title'>{title}</div>

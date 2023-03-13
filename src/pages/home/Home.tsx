@@ -46,8 +46,29 @@ const Home: FC = () => {
                 }
             >
                 <div className='home__videos'>
-                    {videos.map((video: PopularVideos) => {
-                        return <Video key={video.id} video={video} />
+                    {videos.map((video) => {
+                        const {
+                            id,
+                            snippet: {
+                                channelId,
+                                channelTitle,
+                                title,
+                                publishedAt,
+                                thumbnails: { medium }
+                            }
+                        } = video
+                        // return <Video key={video.id} video={video} />
+                        return (
+                            <Video
+                                key={id}
+                                id={id}
+                                channelId={channelId}
+                                channelTitle={channelTitle}
+                                title={title}
+                                publishedAt={publishedAt}
+                                imageURL={medium.url}
+                            />
+                        )
                     })}
                 </div>
             </InfiniteScroll>

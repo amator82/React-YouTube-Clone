@@ -1,4 +1,4 @@
-import { IVideoSnippet, VideoSnippetResourceId } from "./video"
+import { IVideoSnippet } from './video'
 
 export enum ChannelVideosTypes {
     CHANNEL_VIDEOS_REQUEST = 'CHANNEL_VIDEOS_REQUEST',
@@ -9,7 +9,7 @@ export enum ChannelVideosTypes {
 export interface IChannelVideos {
     kind: string
     etag: string
-    id: VideoSnippetResourceId 
+    id: string
     snippet: IVideoSnippet
     contentDetails: {
         videoId: string
