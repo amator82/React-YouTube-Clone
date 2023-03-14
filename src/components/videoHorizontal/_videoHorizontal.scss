@@ -1,11 +1,9 @@
 @import '../../scss/_base.scss';
 
 .videoHorizontal {
+    display: inline-block;
     cursor: pointer;
     border-bottom: 0.3px solid $border-color;
-    &:first-child {
-        padding-top: 0 !important;
-    }
     &__left {
         position: relative;
         text-align: center;

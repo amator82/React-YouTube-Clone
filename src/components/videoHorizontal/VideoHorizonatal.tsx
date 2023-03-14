@@ -20,8 +20,8 @@ type VideoHorizonatalProps = {
     title: string
     publishedAt: string
     imageURL: string
-    searchPage?: any
-    subscriptionPage?: any
+    searchPage?: boolean
+    subscriptionPage?: boolean
     totalItemCount?: number
 }
 
@@ -83,7 +83,7 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
 
     return (
         <Link to={isVideo ? `/watch/${videoId}` : `/channel/${channelId}`}>
-            <Row className='videoHorizontal mx-1 mb-1 py-2'>
+            <Row className='videoHorizontal mx-1 py-4'>
                 <Col
                     xs={6}
                     md={searchPage || subscriptionPage ? 4 : 6}
@@ -133,7 +133,7 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
                         <span>{channelTitle}</span>
                     </div>
                     {subscriptionPage && (
-                        <p className='mt-2'>{totalItemCount} Videos</p>
+                        <p className='m-0'>{totalItemCount} Videos</p>
                     )}
                 </Col>
             </Row>
