@@ -21,14 +21,16 @@ export type SearchedVideo = {
     kind: string
     etag: string
     id: SearchedVideoId
-    publishedAt: string
-    channelId: string
-    title: string
-    description: string
-    thumbnails: SearchedVideoThumbnails
-    channelTitle: string
-    liveBroadcastContent: string
-    publishTime: string
+    snippet: {
+        publishedAt: string
+        channelId: string
+        title: string
+        description: string
+        thumbnails: SearchedVideoThumbnails
+        channelTitle: string
+        liveBroadcastContent: string
+        publishTime: string
+    }
 }
 
 export interface SearchedVideosState {

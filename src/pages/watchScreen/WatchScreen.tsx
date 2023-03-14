@@ -13,7 +13,6 @@ import { useTypedSelector } from './../../hooks/useTypedSelector'
 
 import { Row, Col } from 'react-bootstrap'
 import './watchScreen.scss'
-import { RelatedVideos } from '../../types/relatedVideos'
 
 const WatchScreen: FC = () => {
     const { getVideoById, getRelatedVideos } = useAction()
@@ -24,7 +23,7 @@ const WatchScreen: FC = () => {
         getRelatedVideos(id)
     }, [id])
 
-    const { videos }= useTypedSelector((state) => state.relatedVideos.videos)
+    const { videos } = useTypedSelector((state) => state.relatedVideos)
 
     const { video, loading } = useTypedSelector((state) => state.selectedVideo)
 
@@ -57,13 +56,32 @@ const WatchScreen: FC = () => {
             <Col lg={4}>
                 {!loading
                     ? videos
-                          ?.filter((video: any) => video.snippet)
-                          ?.map((video: RelatedVideos) => (
-                              <VideoHorizonatal
-                                  video={video}
-                                  key={video.id.videoId}
-                              />
-                          ))
+                          ?.filter((video) => video.snippet)
+                          ?.map((video) => {
+                              const {
+                                  id: { kind, videoId },
+                                  snippet: {
+                                      title,
+                                      channelId,
+                                      description,
+                                      publishedAt,
+                                      thumbnails: { medium }
+                                  }
+                              } = video
+
+                              return (
+                                  <VideoHorizonatal
+                                      videoId={videoId}
+                                      kind={kind}
+                                      channelId={channelId}
+                                      description={description}
+                                      title={title}
+                                      publishedAt={publishedAt}
+                                      imageURL={medium.url}
+                                      key={videoId}
+                                  />
+                              )
+                          })
                     : [...new Array(7)].map((_, index) => (
                           <VideoHorizontalSceleton key={index} />
                       ))}

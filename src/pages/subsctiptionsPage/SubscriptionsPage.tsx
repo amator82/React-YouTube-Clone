@@ -22,13 +22,36 @@ const SubscriptionsPage: FC = () => {
     return (
         <Container fluid>
             {!loading
-                ? videos?.map((video: any) => (
-                      <VideoHorizonatal
-                          video={video}
-                          key={video.id}
-                          subscriptionPage
-                      />
-                  ))
+                ? videos?.map((video) => {
+                      const {
+                          id,
+                          snippet: {
+                              title,
+                              description,
+                              resourceId: { kind, channelId },
+                              publishedAt,
+                              thumbnails: { medium }
+                          },
+                          contentDetails: {
+                            totalItemCount
+                          }
+                      } = video
+
+                      return (
+                          <VideoHorizonatal
+                              key={id}
+                              videoId={id}
+                              kind={kind}
+                              channelId={channelId}
+                              description={description}
+                              title={title}
+                              publishedAt={publishedAt}
+                              imageURL={medium.url}
+                              totalItemCount={totalItemCount}
+                              subscriptionPage
+                          />
+                      )
+                  })
                 : [...new Array(6)].map((_, index) => (
                       <SubscriptionsPageSceleton key={index} />
                   ))}

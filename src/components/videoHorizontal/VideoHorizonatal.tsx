@@ -7,44 +7,43 @@ import request from '../../api'
 import moment from 'moment'
 import numeral from 'numeral'
 
-import { TVideo } from './../../types/video'
-
 import { AiFillEye } from 'react-icons/ai'
 import { Row, Col } from 'react-bootstrap'
 import './_videoHorizontal.scss'
-import { RelatedVideos } from '../../types/relatedVideos'
 
 type VideoHorizonatalProps = {
-    video: RelatedVideos
+    kind: string
+    videoId: string
+    channelId: string
+    channelTitle?: string
+    description: string
+    title: string
+    publishedAt: string
+    imageURL: string
     searchPage?: any
     subscriptionPage?: any
+    totalItemCount?: number
 }
 
 const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
-    video,
+    kind,
+    videoId,
+    channelId,
+    channelTitle,
+    description,
+    title,
+    publishedAt,
+    imageURL,
     searchPage,
-    subscriptionPage
+    subscriptionPage,
+    totalItemCount
 }) => {
-    const {
-        id,
-        snippet: {
-            channelId,
-            channelTitle,
-            description,
-            title,
-            publishedAt,
-            thumbnails: { medium }
-        }
-    } = video
-
     const [views, setViews] = useState<number | null>(null)
     const [duration, setDuration] = useState<number | null>(null)
     const [channelIcon, setChannelIcon] = useState<any | null>(null)
 
-    const isVideo = !(id.kind === 'youtube#channel' || subscriptionPage)
+    const isVideo = !(kind === 'youtube#channel' || subscriptionPage)
 
-    const _channelId = id?.videoId || channelId
-    // resourceId?.channelId ||
     useEffect(() => {
         const getVideoDetails = async () => {
             const {
@@ -52,14 +51,15 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
             } = await request('/videos', {
                 params: {
                     part: 'contentDetails,statistics',
-                    id: id.videoId
+                    id: videoId
                 }
             })
+            console.log(items)
             setDuration(items[0].contentDetails.duration)
             setViews(items[0].statistics.viewCount)
         }
         if (isVideo) getVideoDetails()
-    }, [id, isVideo])
+    }, [videoId, isVideo])
 
     useEffect(() => {
         const get_channel_icon = async () => {
@@ -82,7 +82,7 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
     const thumbnail = !isVideo && 'videoHorizontal__thumbnail-channel'
 
     return (
-        <Link to={isVideo ? `/watch/${id.videoId}` : `/channel/${_channelId}`}>
+        <Link to={isVideo ? `/watch/${videoId}` : `/channel/${channelId}`}>
             <Row className='videoHorizontal mx-1 mb-1 py-2'>
                 <Col
                     xs={6}
@@ -90,7 +90,7 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
                     className='videoHorizontal__left'
                 >
                     <LazyLoadImage
-                        src={medium.url}
+                        src={imageURL}
                         effect='blur'
                         className={`videoHorizontal__thumbnail ${thumbnail}`}
                         wrapperClassName='videoHorizontal__thumbnail-wrapper'
@@ -132,11 +132,9 @@ const VideoHorizonatal: FC<VideoHorizonatalProps> = ({
                         )}
                         <span>{channelTitle}</span>
                     </div>
-                    {/* {subscriptionPage && (
-                        <p className='mt-2'>
-                            {video.contentDetails.totalItemCount} Videos
-                        </p>
-                    )} */}
+                    {subscriptionPage && (
+                        <p className='mt-2'>{totalItemCount} Videos</p>
+                    )}
                 </Col>
             </Row>
         </Link>

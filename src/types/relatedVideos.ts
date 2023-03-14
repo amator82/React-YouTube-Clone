@@ -31,12 +31,11 @@ export type RelatedVideos = {
     kind: string
     id: RelatedVideosId
     snippet: RelatedVideosSnippet
-    contentDetails?: any
 }
 
 export type RelatedVideosState = {
     loading: boolean
-    videos: any
+    videos: RelatedVideos[]
 }
 
 interface FetchRelatedVideosRequestAction {

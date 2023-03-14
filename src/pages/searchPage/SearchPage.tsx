@@ -26,13 +26,37 @@ const SearchPage: FC = () => {
     return (
         <Container>
             {!loading
-                ? videos?.map((video: any) => (
-                      <VideoHorizonatal
-                          video={video}
-                          key={video.id.videoId}
-                          searchPage
-                      />
-                  ))
+                ? videos?.map((video) => {
+                      const {
+                          id: {
+                            kind,
+                            videoId
+                          },
+                          snippet: {
+                              title,
+                              channelId,
+                              channelTitle,
+                              description,
+                              publishedAt,
+                              thumbnails: { medium }
+                          }
+                      } = video
+                      
+                      return (
+                          <VideoHorizonatal
+                              kind={kind}
+                              videoId={videoId}
+                              channelId={channelId}
+                              channelTitle={channelTitle}
+                              description={description}
+                              title={title}
+                              publishedAt={publishedAt}
+                              imageURL={medium.url}
+                              key={video.id.videoId}
+                              searchPage
+                          />
+                      )
+                  })
                 : [...new Array(7)].map((_, index) => (
                       <SearchPageSceleton key={index} />
                   ))}
